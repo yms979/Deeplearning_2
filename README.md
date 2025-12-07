@@ -13,7 +13,8 @@
   * Training Objective: 논문에서 정의된 Cross-Entropy 기반의 Posterior 학습 loss
 
 ### 4. Quantitative Analysis
-Metric,User Result (WikiText),Reference (Facebook - Linear/Mask),Note
-ELBO,45.61,53.2,학습 수렴도 지표
-Perplexity (PPL),187.29,128.9,낮을수록 좋음
-Entropy,7.93,N/A,다양성 지표 (≥6 권장)
+| Metric | User Result (WikiText) | Reference (OpenWebText/Internal) | Note |
+| :--- | :---: | :---: | :--- |
+| **ELBO** | **45.61** | 53.2 | Lower is better (technically NLL bound), indicates convergence. |
+| **Perplexity** | **187.29** | 128.9 | [cite_start]Evaluated without temperature scaling[cite: 252]. |
+| **Entropy** | **7.93** | N/A | [cite_start]High entropy indicates diverse generation ($\ge 6$ is good)[cite: 287]. |
