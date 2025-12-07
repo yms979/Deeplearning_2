@@ -44,3 +44,38 @@
 본 과제에서는 Meta AI가 제안한 Discrete Flow Matching 모델을 기반으로, 제한된 컴퓨팅 자원과 소규모 데이터셋 환경에서 이산 데이터 생성 성능을 검증하고 학습 파이프라인을 재현하였다. 특히 대규모 인프라가 필수적인 최신 생성형 AI 연구 흐름 속에서, 상대적으로 작은 규모인 WikiText-103 데이터셋과 경량화된 모델 구조로도 안정적인 학습과 추론이 가능한지를 확인하는것을 목표로 상정하였다.
  실험 결과, 모델의 학습 안정성을 나타내는 ELBO 지표가 45.61로 수렴하고 생성 다양성을 나타내는 Entropy가 7.93을 기록하며, 모델이 특정 패턴에 갇히는 현상 없이 다양한 어휘 분포를 학습했음을 입증하였다. 정성적 분석에서도 모델은 역사, 기술, 엔터테인먼트 등 다양한 도메인의 문체를 자연스럽게 구사하고, 위키백과 특유의 문서 구조를 정교하게 모방하는 성과를 보였다. 다만, 참조 논문의 OpenWebText 대비 부족한 데이터 규모로 인해 Perplexity 수치가 다소 높게 측정되었으며, 문법적 유창함에 비해 사실관계가 맞지 않는 Hallucination 현상이 관찰되었다. 이는 알고리즘 자체의 결함보다는 학습 데이터의 양적 한계에 기인한 것으로 판단된다.
  결론적으로 본 연구는 DFM 프레임워크가 대규모 자원 없이도 텍스트의 복잡한 이산적 분포를 효과적으로 모델링할 수 있다는 강건성을 확인할 수 있었다. 이는 거대 언어 모델 연구가 주를 이루는 현시점에서, 학계나 개인 연구자가 접근 가능한 수준의 자원으로도 충분히 의미 있는 생성 모델 연구가 가능함을 시사한다. 향후에는 본 재현 과정을 통해 확보한 DFM 프레임워크를 개인 연구에 적극 도입하여, 실제 연구 목적과 가용 데이터의 특성에 최적화된 맞춤형 생성 모델을 활용해 나갈 계획이다.
+
+
+## Usage
+
+This section provides instructions on how to train the Discrete Flow Matching (DFM) model and generate text samples.
+
+### 1. Environment Setup
+First, install the required dependencies. We recommend using a virtual environment (Conda or venv).
+
+```bash
+# Clone the repository
+git clone [https://github.com/your-username/discrete-flow-matching.git](https://github.com/your-username/discrete-flow-matching.git)
+cd discrete-flow-matching
+
+# Install dependencies
+pip install -r requirements.txt
+
+
+We use WikiText-103 as the training dataset. The script automatically downloads and processes the data using the Hugging Face datasets library.
+
+To reproduce the Small Model (150M parameters) experiment described in the report, run the following command:
+python train.py \
+    --run_name "dfm-wikitext-small" \
+    --dataset_name "wikitext" \
+    --dataset_config "wikitext-103-raw-v1" \
+    --model_arch "dit_small" \
+    --hidden_size 768 \
+    --num_layers 12 \
+    --num_heads 12 \
+    --max_seq_length 1024 \
+    --batch_size 32 \
+    --learning_rate 3e-4 \
+    --max_steps 50000 \
+    --save_interval 5000 \
+    --output_dir "./checkpoints"
