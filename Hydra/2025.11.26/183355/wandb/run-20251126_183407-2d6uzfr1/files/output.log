@@ -1,0 +1,1370 @@
+INFO | 2025-11-26 18:34:08 | WorkDirectory(root=PosixPath('/home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355'), checkpoint=PosixPath('/home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355/checkpoints/checkpoint.pth'), samples=PosixPath('/home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355/samples'))
+INFO | 2025-11-26 18:34:08 | {'compute': {'ngpus': 7, 'nodes': 1}, 'logging': {'log_freq': 100, 'log_lr_every': '${logging.log_freq}', 'log_file_name': 'stdout.log', 'enable_wandb': True, 'entity': None, 'project': 'flow_matching', 'group': None}, 'data': {'train': 'wikitext103', 'valid': 'wikitext103', 'cache_dir': '/home/yms/flow_matching/examples/text/cache', 'num_workers': 8}, 'training': {'batch_size': 64, 'snapshot': 2000, 'eval_freq': 20000, 'perplexity_freq': 20000, 'seed': 42}, 'eval': {'batch_size': 16, 'sample_batch_size': 8, 'perplexity': True, 'perplexity_batch_size': 8}, 'optim': {'weight_decay': 0.03, 'optimizer': 'AdamW', 'lr': 0.0003, 'beta1': 0.9, 'beta2': 0.95, 'eps': 1e-08, 'warmup': 2500, 'grad_clip': 1.0, 'eta_min_ratio': 0.1, 'fused': False, 'n_iters': 1000000, 'log_lr_every': '${logging.log_lr_every}'}, 'flow': {'source_distribution': 'uniform', 'loss_function': 'cross_entropy', 'exponent': 1.0, 'scheduler_type': 'polynomial', 'sampling_steps': 1024}, 'model': {'hidden_size': 768, 'cond_dim': 128, 'length': 1024, 'n_blocks': 12, 'n_heads': 12, 'dropout': 0.1, 'compile': True}, 'hydra_dir': '/home/yms/flow_matching/examples/text/Hydra', 'work_dir': '/home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355'}
+INFO | 2025-11-26 18:34:08 | Found 7 CUDA devices.
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | NVIDIA GeForce RTX 3090 	 Memory: 23.56GB
+INFO | 2025-11-26 18:34:08 | Found 40 total number of CPUs.
+INFO | 2025-11-26 18:34:11 | Number of parameters in the model: 169625681
+INFO | 2025-11-26 18:34:12 | DistributedDataParallel(
+  (module): Transformer(
+    (vocab_embed): Embedding(50257, 768)
+    (time_embedding): TimestepEmbedder(
+      (mlp): Sequential(
+        (0): Linear(in_features=256, out_features=128, bias=True)
+        (1): SiLU()
+        (2): Linear(in_features=128, out_features=128, bias=True)
+      )
+    )
+    (rotary_emb): Rotary()
+    (blocks): ModuleList(
+      (0-11): 12 x DDiTBlock(
+        (norm1): LayerNorm()
+        (qw): Linear(in_features=768, out_features=768, bias=False)
+        (kw): Linear(in_features=768, out_features=768, bias=False)
+        (vw): Linear(in_features=768, out_features=768, bias=False)
+        (attn_out): Linear(in_features=768, out_features=768, bias=False)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (norm2): LayerNorm()
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=3072, bias=True)
+          (1): GELU(approximate='tanh')
+          (2): Linear(in_features=3072, out_features=768, bias=True)
+        )
+        (adaLN_modulation): Linear(in_features=128, out_features=4608, bias=True)
+      )
+    )
+    (output_layer): DDitFinalLayer(
+      (norm_final): LayerNorm()
+      (linear): Linear(in_features=768, out_features=50257, bias=True)
+      (adaLN_modulation): Linear(in_features=128, out_features=1536, bias=True)
+    )
+  )
+)
+INFO | 2025-11-26 18:34:12 | Optimizer: AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.95)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: False
+    lr: 0.0003
+    maximize: False
+    weight_decay: 0.03
+)
+INFO | 2025-11-26 18:34:12 | Scaler: <torch.amp.grad_scaler.GradScaler object at 0x7f59dc105ff0>
+WARNING | 2025-11-26 18:34:22 | No checkpoint found at /home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355/checkpoints/checkpoint.pth. Returned the same state as input
+INFO | 2025-11-26 18:34:24 | Starting training loop at step 1.
+[rank0]:W1126 18:34:42.294000 115523 site-packages/torch/_logging/_internal.py:1199] [0/0] Profiler function <class 'torch.autograd.profiler.record_function'> will be ignored
+INFO | 2025-11-26 18:36:56 | [100] Train Loss: 10.750
+INFO | 2025-11-26 18:38:26 | [200] Train Loss: 10.250
+INFO | 2025-11-26 18:39:55 | [300] Train Loss: 8.375
+INFO | 2025-11-26 18:41:41 | [400] Train Loss: 6.250
+INFO | 2025-11-26 18:43:11 | [500] Train Loss: 4.625
+INFO | 2025-11-26 18:44:41 | [600] Train Loss: 4.188
+INFO | 2025-11-26 18:46:11 | [700] Train Loss: 4.062
+INFO | 2025-11-26 18:47:41 | [800] Train Loss: 4.000
+INFO | 2025-11-26 18:49:11 | [900] Train Loss: 3.875
+INFO | 2025-11-26 18:50:41 | [1000] Train Loss: 3.797
+INFO | 2025-11-26 18:52:11 | [1100] Train Loss: 3.750
+INFO | 2025-11-26 18:53:41 | [1200] Train Loss: 3.625
+INFO | 2025-11-26 18:55:11 | [1300] Train Loss: 3.562
+INFO | 2025-11-26 18:56:40 | [1400] Train Loss: 3.500
+INFO | 2025-11-26 18:58:10 | [1500] Train Loss: 3.469
+INFO | 2025-11-26 18:59:40 | [1600] Train Loss: 3.453
+INFO | 2025-11-26 19:01:26 | [1700] Train Loss: 3.391
+INFO | 2025-11-26 19:03:28 | [1800] Train Loss: 3.312
+INFO | 2025-11-26 19:04:58 | [1900] Train Loss: 3.375
+INFO | 2025-11-26 19:06:29 | [2000] Train Loss: 3.312
+INFO | 2025-11-26 19:06:29 | [2000] Saving checkpoint...
+INFO | 2025-11-26 19:08:01 | [2100] Train Loss: 3.328
+INFO | 2025-11-26 19:09:31 | [2200] Train Loss: 3.281
+INFO | 2025-11-26 19:11:01 | [2300] Train Loss: 3.219
+INFO | 2025-11-26 19:12:31 | [2400] Train Loss: 3.297
+INFO | 2025-11-26 19:14:01 | [2500] Train Loss: 3.234
+INFO | 2025-11-26 19:15:31 | [2600] Train Loss: 3.234
+INFO | 2025-11-26 19:17:01 | [2700] Train Loss: 3.219
+INFO | 2025-11-26 19:18:31 | [2800] Train Loss: 3.156
+INFO | 2025-11-26 19:20:02 | [2900] Train Loss: 3.188
+INFO | 2025-11-26 19:21:49 | [3000] Train Loss: 3.156
+INFO | 2025-11-26 19:23:20 | [3100] Train Loss: 3.141
+INFO | 2025-11-26 19:24:51 | [3200] Train Loss: 3.141
+INFO | 2025-11-26 19:26:21 | [3300] Train Loss: 3.109
+INFO | 2025-11-26 19:27:52 | [3400] Train Loss: 3.109
+INFO | 2025-11-26 19:29:22 | [3500] Train Loss: 3.062
+INFO | 2025-11-26 19:30:52 | [3600] Train Loss: 3.062
+INFO | 2025-11-26 19:32:21 | [3700] Train Loss: 3.031
+INFO | 2025-11-26 19:33:51 | [3800] Train Loss: 3.031
+INFO | 2025-11-26 19:35:21 | [3900] Train Loss: 3.031
+INFO | 2025-11-26 19:36:51 | [4000] Train Loss: 2.984
+INFO | 2025-11-26 19:36:51 | [4000] Saving checkpoint...
+INFO | 2025-11-26 19:38:28 | [4100] Train Loss: 3.031
+INFO | 2025-11-26 19:39:58 | [4200] Train Loss: 3.031
+INFO | 2025-11-26 19:41:44 | [4300] Train Loss: 3.016
+INFO | 2025-11-26 19:43:14 | [4400] Train Loss: 2.938
+INFO | 2025-11-26 19:44:44 | [4500] Train Loss: 2.984
+INFO | 2025-11-26 19:46:14 | [4600] Train Loss: 2.969
+INFO | 2025-11-26 19:47:44 | [4700] Train Loss: 2.953
+INFO | 2025-11-26 19:49:14 | [4800] Train Loss: 2.938
+INFO | 2025-11-26 19:50:44 | [4900] Train Loss: 2.953
+INFO | 2025-11-26 19:52:14 | [5000] Train Loss: 2.969
+INFO | 2025-11-26 19:53:44 | [5100] Train Loss: 2.953
+INFO | 2025-11-26 19:55:14 | [5200] Train Loss: 2.938
+INFO | 2025-11-26 19:56:43 | [5300] Train Loss: 2.938
+INFO | 2025-11-26 19:58:13 | [5400] Train Loss: 2.906
+INFO | 2025-11-26 19:59:43 | [5500] Train Loss: 2.938
+INFO | 2025-11-26 20:01:13 | [5600] Train Loss: 2.938
+INFO | 2025-11-26 20:03:00 | [5700] Train Loss: 2.906
+INFO | 2025-11-26 20:04:30 | [5800] Train Loss: 2.906
+INFO | 2025-11-26 20:06:00 | [5900] Train Loss: 2.859
+INFO | 2025-11-26 20:07:31 | [6000] Train Loss: 2.891
+INFO | 2025-11-26 20:07:31 | [6000] Saving checkpoint...
+INFO | 2025-11-26 20:09:08 | [6100] Train Loss: 2.922
+INFO | 2025-11-26 20:10:38 | [6200] Train Loss: 2.875
+INFO | 2025-11-26 20:12:08 | [6300] Train Loss: 2.875
+INFO | 2025-11-26 20:13:38 | [6400] Train Loss: 2.844
+INFO | 2025-11-26 20:15:08 | [6500] Train Loss: 2.891
+INFO | 2025-11-26 20:16:39 | [6600] Train Loss: 2.828
+INFO | 2025-11-26 20:18:10 | [6700] Train Loss: 2.859
+INFO | 2025-11-26 20:19:40 | [6800] Train Loss: 2.797
+INFO | 2025-11-26 20:21:11 | [6900] Train Loss: 2.844
+INFO | 2025-11-26 20:22:57 | [7000] Train Loss: 2.844
+INFO | 2025-11-26 20:24:27 | [7100] Train Loss: 2.828
+INFO | 2025-11-26 20:25:57 | [7200] Train Loss: 2.859
+INFO | 2025-11-26 20:27:27 | [7300] Train Loss: 2.797
+INFO | 2025-11-26 20:28:57 | [7400] Train Loss: 2.812
+INFO | 2025-11-26 20:30:27 | [7500] Train Loss: 2.812
+INFO | 2025-11-26 20:31:57 | [7600] Train Loss: 2.844
+INFO | 2025-11-26 20:33:27 | [7700] Train Loss: 2.812
+INFO | 2025-11-26 20:34:57 | [7800] Train Loss: 2.797
+INFO | 2025-11-26 20:36:27 | [7900] Train Loss: 2.844
+INFO | 2025-11-26 20:37:57 | [8000] Train Loss: 2.797
+INFO | 2025-11-26 20:37:57 | [8000] Saving checkpoint...
+INFO | 2025-11-26 20:39:34 | [8100] Train Loss: 2.781
+INFO | 2025-11-26 20:41:03 | [8200] Train Loss: 2.844
+INFO | 2025-11-26 20:42:49 | [8300] Train Loss: 2.812
+INFO | 2025-11-26 20:44:19 | [8400] Train Loss: 2.750
+INFO | 2025-11-26 20:45:49 | [8500] Train Loss: 2.812
+INFO | 2025-11-26 20:47:19 | [8600] Train Loss: 2.828
+INFO | 2025-11-26 20:48:50 | [8700] Train Loss: 2.750
+INFO | 2025-11-26 20:50:20 | [8800] Train Loss: 2.766
+INFO | 2025-11-26 20:51:50 | [8900] Train Loss: 2.766
+INFO | 2025-11-26 20:53:20 | [9000] Train Loss: 2.844
+INFO | 2025-11-26 20:54:50 | [9100] Train Loss: 2.812
+INFO | 2025-11-26 20:56:20 | [9200] Train Loss: 2.781
+INFO | 2025-11-26 20:57:50 | [9300] Train Loss: 2.750
+INFO | 2025-11-26 20:59:20 | [9400] Train Loss: 2.797
+INFO | 2025-11-26 21:00:50 | [9500] Train Loss: 2.781
+INFO | 2025-11-26 21:02:20 | [9600] Train Loss: 2.781
+INFO | 2025-11-26 21:04:06 | [9700] Train Loss: 2.750
+INFO | 2025-11-26 21:05:35 | [9800] Train Loss: 2.797
+INFO | 2025-11-26 21:07:05 | [9900] Train Loss: 2.766
+INFO | 2025-11-26 21:08:36 | [10000] Train Loss: 2.812
+INFO | 2025-11-26 21:08:36 | [10000] Saving checkpoint...
+INFO | 2025-11-26 21:10:13 | [10100] Train Loss: 2.766
+INFO | 2025-11-26 21:11:43 | [10200] Train Loss: 2.781
+INFO | 2025-11-26 21:13:14 | [10300] Train Loss: 2.750
+INFO | 2025-11-26 21:14:44 | [10400] Train Loss: 2.750
+INFO | 2025-11-26 21:16:16 | [10500] Train Loss: 2.750
+INFO | 2025-11-26 21:17:45 | [10600] Train Loss: 2.766
+INFO | 2025-11-26 21:19:16 | [10700] Train Loss: 2.766
+INFO | 2025-11-26 21:20:46 | [10800] Train Loss: 2.719
+INFO | 2025-11-26 21:22:16 | [10900] Train Loss: 2.781
+INFO | 2025-11-26 21:24:02 | [11000] Train Loss: 2.734
+INFO | 2025-11-26 21:25:32 | [11100] Train Loss: 2.734
+INFO | 2025-11-26 21:27:02 | [11200] Train Loss: 2.734
+INFO | 2025-11-26 21:28:32 | [11300] Train Loss: 2.703
+INFO | 2025-11-26 21:30:02 | [11400] Train Loss: 2.719
+INFO | 2025-11-26 21:31:32 | [11500] Train Loss: 2.734
+INFO | 2025-11-26 21:33:02 | [11600] Train Loss: 2.719
+INFO | 2025-11-26 21:34:32 | [11700] Train Loss: 2.734
+INFO | 2025-11-26 21:36:02 | [11800] Train Loss: 2.766
+INFO | 2025-11-26 21:37:32 | [11900] Train Loss: 2.703
+INFO | 2025-11-26 21:39:02 | [12000] Train Loss: 2.719
+INFO | 2025-11-26 21:39:02 | [12000] Saving checkpoint...
+INFO | 2025-11-26 21:40:39 | [12100] Train Loss: 2.719
+INFO | 2025-11-26 21:42:09 | [12200] Train Loss: 2.734
+INFO | 2025-11-26 21:43:55 | [12300] Train Loss: 2.719
+INFO | 2025-11-26 21:45:25 | [12400] Train Loss: 2.703
+INFO | 2025-11-26 21:46:55 | [12500] Train Loss: 2.719
+INFO | 2025-11-26 21:48:25 | [12600] Train Loss: 2.688
+INFO | 2025-11-26 21:49:56 | [12700] Train Loss: 2.703
+INFO | 2025-11-26 21:51:26 | [12800] Train Loss: 2.625
+INFO | 2025-11-26 21:52:56 | [12900] Train Loss: 2.719
+INFO | 2025-11-26 21:54:25 | [13000] Train Loss: 2.750
+INFO | 2025-11-26 21:55:55 | [13100] Train Loss: 2.703
+INFO | 2025-11-26 21:57:25 | [13200] Train Loss: 2.688
+INFO | 2025-11-26 21:58:55 | [13300] Train Loss: 2.719
+INFO | 2025-11-26 22:00:25 | [13400] Train Loss: 2.719
+INFO | 2025-11-26 22:01:55 | [13500] Train Loss: 2.719
+INFO | 2025-11-26 22:03:25 | [13600] Train Loss: 2.719
+INFO | 2025-11-26 22:05:11 | [13700] Train Loss: 2.703
+INFO | 2025-11-26 22:06:41 | [13800] Train Loss: 2.719
+INFO | 2025-11-26 22:08:10 | [13900] Train Loss: 2.688
+INFO | 2025-11-26 22:09:41 | [14000] Train Loss: 2.688
+INFO | 2025-11-26 22:09:41 | [14000] Saving checkpoint...
+INFO | 2025-11-26 22:11:18 | [14100] Train Loss: 2.719
+INFO | 2025-11-26 22:12:49 | [14200] Train Loss: 2.734
+INFO | 2025-11-26 22:14:20 | [14300] Train Loss: 2.688
+INFO | 2025-11-26 22:15:50 | [14400] Train Loss: 2.688
+INFO | 2025-11-26 22:17:21 | [14500] Train Loss: 2.703
+INFO | 2025-11-26 22:18:51 | [14600] Train Loss: 2.719
+INFO | 2025-11-26 22:20:21 | [14700] Train Loss: 2.672
+INFO | 2025-11-26 22:21:51 | [14800] Train Loss: 2.688
+INFO | 2025-11-26 22:23:20 | [14900] Train Loss: 2.688
+INFO | 2025-11-26 22:25:04 | [15000] Train Loss: 2.719
+INFO | 2025-11-26 22:26:34 | [15100] Train Loss: 2.656
+INFO | 2025-11-26 22:28:04 | [15200] Train Loss: 2.656
+INFO | 2025-11-26 22:29:34 | [15300] Train Loss: 2.688
+INFO | 2025-11-26 22:31:04 | [15400] Train Loss: 2.688
+INFO | 2025-11-26 22:32:34 | [15500] Train Loss: 2.672
+INFO | 2025-11-26 22:34:04 | [15600] Train Loss: 2.719
+INFO | 2025-11-26 22:35:34 | [15700] Train Loss: 2.703
+INFO | 2025-11-26 22:37:04 | [15800] Train Loss: 2.703
+INFO | 2025-11-26 22:38:34 | [15900] Train Loss: 2.672
+INFO | 2025-11-26 22:40:04 | [16000] Train Loss: 2.672
+INFO | 2025-11-26 22:40:04 | [16000] Saving checkpoint...
+INFO | 2025-11-26 22:41:41 | [16100] Train Loss: 2.688
+INFO | 2025-11-26 22:43:11 | [16200] Train Loss: 2.656
+INFO | 2025-11-26 22:44:57 | [16300] Train Loss: 2.672
+INFO | 2025-11-26 22:46:27 | [16400] Train Loss: 2.656
+INFO | 2025-11-26 22:47:57 | [16500] Train Loss: 2.672
+INFO | 2025-11-26 22:49:27 | [16600] Train Loss: 2.656
+INFO | 2025-11-26 22:50:57 | [16700] Train Loss: 2.656
+INFO | 2025-11-26 22:52:27 | [16800] Train Loss: 2.641
+INFO | 2025-11-26 22:53:57 | [16900] Train Loss: 2.641
+INFO | 2025-11-26 22:55:27 | [17000] Train Loss: 2.641
+INFO | 2025-11-26 22:56:57 | [17100] Train Loss: 2.656
+INFO | 2025-11-26 22:58:28 | [17200] Train Loss: 2.672
+INFO | 2025-11-26 22:59:57 | [17300] Train Loss: 2.641
+INFO | 2025-11-26 23:01:27 | [17400] Train Loss: 2.672
+INFO | 2025-11-26 23:02:57 | [17500] Train Loss: 2.625
+INFO | 2025-11-26 23:04:27 | [17600] Train Loss: 2.641
+INFO | 2025-11-26 23:06:13 | [17700] Train Loss: 2.625
+INFO | 2025-11-26 23:07:42 | [17800] Train Loss: 2.656
+INFO | 2025-11-26 23:09:12 | [17900] Train Loss: 2.641
+INFO | 2025-11-26 23:10:43 | [18000] Train Loss: 2.641
+INFO | 2025-11-26 23:10:43 | [18000] Saving checkpoint...
+INFO | 2025-11-26 23:12:21 | [18100] Train Loss: 2.672
+INFO | 2025-11-26 23:13:52 | [18200] Train Loss: 2.688
+INFO | 2025-11-26 23:15:23 | [18300] Train Loss: 2.688
+INFO | 2025-11-26 23:16:53 | [18400] Train Loss: 2.656
+INFO | 2025-11-26 23:18:23 | [18500] Train Loss: 2.641
+INFO | 2025-11-26 23:19:53 | [18600] Train Loss: 2.656
+INFO | 2025-11-26 23:21:23 | [18700] Train Loss: 2.625
+INFO | 2025-11-26 23:22:53 | [18800] Train Loss: 2.656
+INFO | 2025-11-26 23:24:23 | [18900] Train Loss: 2.672
+INFO | 2025-11-26 23:26:09 | [19000] Train Loss: 2.641
+INFO | 2025-11-26 23:27:39 | [19100] Train Loss: 2.672
+INFO | 2025-11-26 23:29:09 | [19200] Train Loss: 2.641
+INFO | 2025-11-26 23:30:39 | [19300] Train Loss: 2.672
+INFO | 2025-11-26 23:32:09 | [19400] Train Loss: 2.609
+INFO | 2025-11-26 23:33:39 | [19500] Train Loss: 2.625
+INFO | 2025-11-26 23:35:09 | [19600] Train Loss: 2.672
+INFO | 2025-11-26 23:36:38 | [19700] Train Loss: 2.641
+INFO | 2025-11-26 23:38:09 | [19800] Train Loss: 2.656
+INFO | 2025-11-26 23:39:39 | [19900] Train Loss: 2.656
+INFO | 2025-11-26 23:41:08 | [20000] Train Loss: 2.672
+INFO | 2025-11-26 23:41:08 | [20000] Saving checkpoint...
+INFO | 2025-11-26 23:41:19 | [20000] Evaluating loss...
+/home/yms/miniconda3/envs/discrete_flow_matching/lib/python3.10/site-packages/torch/_dynamo/variables/functions.py:1598: UserWarning: Dynamo does not know how to trace the builtin `torch._C._distributed_c10d.pybind11_detail_function_record_v1_system_libstdcpp_gxx_abi_1xxx_use_cxx11_abi_1._broadcast_coalesced.` This function is either a Python builtin (e.g. _warnings.warn) or a third-party C/C++ Python extension (perhaps created with pybind).
+If it is a Python builtin, please file an issue on GitHub so the PyTorch team can add support for it and see the next case for a workaround.
+If it is a third-party C/C++ Python extension, please either wrap it into a PyTorch-understood custom operator (see https://pytorch.org/tutorials/advanced/custom_ops_landing_page.html for more details) or, if it is traceable, use `torch.compiler.allow_in_graph`.
+  torch._dynamo.utils.warn_once(explanation + "\n" + "\n".join(hints))
+INFO | 2025-11-26 23:42:01 | [20000] Evaluation Loss: 1.422
+INFO | 2025-11-26 23:42:01 | [20000] Generating text...
+NFE: 1024: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.0/1.0 [03:01<00:00, 181.10s/it]
+`loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+INFO | 2025-11-26 23:45:06 | [20000] Evaluation Perplexity: 270.069
+INFO | 2025-11-26 23:45:06 | [20000] Evaluation Entropy: 7.879
+/home/yms/miniconda3/envs/discrete_flow_matching/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4876: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  warnings.warn(  # warn only once
+INFO | 2025-11-26 23:46:51 | [20100] Train Loss: 2.641
+INFO | 2025-11-26 23:48:21 | [20200] Train Loss: 2.609
+INFO | 2025-11-26 23:49:51 | [20300] Train Loss: 2.625
+INFO | 2025-11-26 23:51:22 | [20400] Train Loss: 2.625
+INFO | 2025-11-26 23:52:51 | [20500] Train Loss: 2.641
+INFO | 2025-11-26 23:54:21 | [20600] Train Loss: 2.656
+INFO | 2025-11-26 23:55:51 | [20700] Train Loss: 2.656
+INFO | 2025-11-26 23:57:21 | [20800] Train Loss: 2.625
+INFO | 2025-11-26 23:58:50 | [20900] Train Loss: 2.578
+INFO | 2025-11-27 00:00:21 | [21000] Train Loss: 2.594
+INFO | 2025-11-27 00:01:50 | [21100] Train Loss: 2.578
+INFO | 2025-11-27 00:03:20 | [21200] Train Loss: 2.609
+INFO | 2025-11-27 00:04:50 | [21300] Train Loss: 2.609
+INFO | 2025-11-27 00:06:37 | [21400] Train Loss: 2.625
+INFO | 2025-11-27 00:08:06 | [21500] Train Loss: 2.656
+INFO | 2025-11-27 00:09:36 | [21600] Train Loss: 2.609
+INFO | 2025-11-27 00:11:07 | [21700] Train Loss: 2.641
+INFO | 2025-11-27 00:12:37 | [21800] Train Loss: 2.578
+INFO | 2025-11-27 00:14:06 | [21900] Train Loss: 2.641
+INFO | 2025-11-27 00:15:36 | [22000] Train Loss: 2.625
+INFO | 2025-11-27 00:15:36 | [22000] Saving checkpoint...
+INFO | 2025-11-27 00:17:14 | [22100] Train Loss: 2.672
+INFO | 2025-11-27 00:18:43 | [22200] Train Loss: 2.578
+INFO | 2025-11-27 00:20:13 | [22300] Train Loss: 2.625
+INFO | 2025-11-27 00:21:43 | [22400] Train Loss: 2.625
+INFO | 2025-11-27 00:23:13 | [22500] Train Loss: 2.578
+INFO | 2025-11-27 00:24:43 | [22600] Train Loss: 2.594
+INFO | 2025-11-27 00:26:26 | [22700] Train Loss: 2.625
+INFO | 2025-11-27 00:27:56 | [22800] Train Loss: 2.609
+INFO | 2025-11-27 00:29:25 | [22900] Train Loss: 2.609
+INFO | 2025-11-27 00:30:55 | [23000] Train Loss: 2.609
+INFO | 2025-11-27 00:32:26 | [23100] Train Loss: 2.656
+INFO | 2025-11-27 00:33:56 | [23200] Train Loss: 2.609
+INFO | 2025-11-27 00:35:26 | [23300] Train Loss: 2.656
+INFO | 2025-11-27 00:36:55 | [23400] Train Loss: 2.625
+INFO | 2025-11-27 00:38:25 | [23500] Train Loss: 2.594
+INFO | 2025-11-27 00:39:55 | [23600] Train Loss: 2.625
+INFO | 2025-11-27 00:41:24 | [23700] Train Loss: 2.562
+INFO | 2025-11-27 00:42:54 | [23800] Train Loss: 2.625
+INFO | 2025-11-27 00:44:24 | [23900] Train Loss: 2.594
+INFO | 2025-11-27 00:45:54 | [24000] Train Loss: 2.594
+INFO | 2025-11-27 00:45:54 | [24000] Saving checkpoint...
+INFO | 2025-11-27 00:47:47 | [24100] Train Loss: 2.594
+INFO | 2025-11-27 00:49:17 | [24200] Train Loss: 2.609
+INFO | 2025-11-27 00:50:48 | [24300] Train Loss: 2.625
+INFO | 2025-11-27 00:52:20 | [24400] Train Loss: 2.656
+INFO | 2025-11-27 00:53:51 | [24500] Train Loss: 2.609
+INFO | 2025-11-27 00:55:20 | [24600] Train Loss: 2.594
+INFO | 2025-11-27 00:56:50 | [24700] Train Loss: 2.562
+INFO | 2025-11-27 00:58:20 | [24800] Train Loss: 2.641
+INFO | 2025-11-27 00:59:50 | [24900] Train Loss: 2.625
+INFO | 2025-11-27 01:01:20 | [25000] Train Loss: 2.594
+INFO | 2025-11-27 01:02:50 | [25100] Train Loss: 2.641
+INFO | 2025-11-27 01:04:20 | [25200] Train Loss: 2.625
+INFO | 2025-11-27 01:05:49 | [25300] Train Loss: 2.625
+INFO | 2025-11-27 01:07:36 | [25400] Train Loss: 2.641
+INFO | 2025-11-27 01:09:06 | [25500] Train Loss: 2.594
+INFO | 2025-11-27 01:10:36 | [25600] Train Loss: 2.562
+INFO | 2025-11-27 01:12:07 | [25700] Train Loss: 2.594
+INFO | 2025-11-27 01:13:37 | [25800] Train Loss: 2.609
+INFO | 2025-11-27 01:15:07 | [25900] Train Loss: 2.594
+INFO | 2025-11-27 01:16:36 | [26000] Train Loss: 2.625
+INFO | 2025-11-27 01:16:36 | [26000] Saving checkpoint...
+INFO | 2025-11-27 01:18:14 | [26100] Train Loss: 2.656
+INFO | 2025-11-27 01:19:44 | [26200] Train Loss: 2.562
+INFO | 2025-11-27 01:21:14 | [26300] Train Loss: 2.609
+INFO | 2025-11-27 01:22:43 | [26400] Train Loss: 2.609
+INFO | 2025-11-27 01:24:13 | [26500] Train Loss: 2.578
+INFO | 2025-11-27 01:25:43 | [26600] Train Loss: 2.594
+INFO | 2025-11-27 01:27:28 | [26700] Train Loss: 2.625
+INFO | 2025-11-27 01:28:57 | [26800] Train Loss: 2.609
+INFO | 2025-11-27 01:30:27 | [26900] Train Loss: 2.578
+INFO | 2025-11-27 01:31:57 | [27000] Train Loss: 2.578
+INFO | 2025-11-27 01:33:27 | [27100] Train Loss: 2.609
+INFO | 2025-11-27 01:34:57 | [27200] Train Loss: 2.578
+INFO | 2025-11-27 01:36:27 | [27300] Train Loss: 2.594
+INFO | 2025-11-27 01:37:57 | [27400] Train Loss: 2.672
+INFO | 2025-11-27 01:39:26 | [27500] Train Loss: 2.625
+INFO | 2025-11-27 01:40:56 | [27600] Train Loss: 2.578
+INFO | 2025-11-27 01:42:26 | [27700] Train Loss: 2.594
+INFO | 2025-11-27 01:43:56 | [27800] Train Loss: 2.625
+INFO | 2025-11-27 01:45:25 | [27900] Train Loss: 2.578
+INFO | 2025-11-27 01:46:55 | [28000] Train Loss: 2.594
+INFO | 2025-11-27 01:46:55 | [28000] Saving checkpoint...
+INFO | 2025-11-27 01:48:49 | [28100] Train Loss: 2.562
+INFO | 2025-11-27 01:50:19 | [28200] Train Loss: 2.547
+INFO | 2025-11-27 01:51:48 | [28300] Train Loss: 2.594
+INFO | 2025-11-27 01:53:19 | [28400] Train Loss: 2.641
+INFO | 2025-11-27 01:54:49 | [28500] Train Loss: 2.594
+INFO | 2025-11-27 01:56:19 | [28600] Train Loss: 2.578
+INFO | 2025-11-27 01:57:48 | [28700] Train Loss: 2.578
+INFO | 2025-11-27 01:59:19 | [28800] Train Loss: 2.594
+INFO | 2025-11-27 02:00:50 | [28900] Train Loss: 2.578
+INFO | 2025-11-27 02:02:20 | [29000] Train Loss: 2.625
+INFO | 2025-11-27 02:03:51 | [29100] Train Loss: 2.625
+INFO | 2025-11-27 02:05:21 | [29200] Train Loss: 2.562
+INFO | 2025-11-27 02:06:51 | [29300] Train Loss: 2.594
+INFO | 2025-11-27 02:08:34 | [29400] Train Loss: 2.562
+INFO | 2025-11-27 02:10:04 | [29500] Train Loss: 2.625
+INFO | 2025-11-27 02:11:35 | [29600] Train Loss: 2.594
+INFO | 2025-11-27 02:13:06 | [29700] Train Loss: 2.531
+INFO | 2025-11-27 02:14:35 | [29800] Train Loss: 2.578
+INFO | 2025-11-27 02:16:05 | [29900] Train Loss: 2.562
+INFO | 2025-11-27 02:17:35 | [30000] Train Loss: 2.625
+INFO | 2025-11-27 02:17:35 | [30000] Saving checkpoint...
+INFO | 2025-11-27 02:19:12 | [30100] Train Loss: 2.594
+INFO | 2025-11-27 02:20:42 | [30200] Train Loss: 2.594
+INFO | 2025-11-27 02:22:12 | [30300] Train Loss: 2.594
+INFO | 2025-11-27 02:23:42 | [30400] Train Loss: 2.578
+INFO | 2025-11-27 02:25:12 | [30500] Train Loss: 2.594
+INFO | 2025-11-27 02:26:42 | [30600] Train Loss: 2.547
+INFO | 2025-11-27 02:28:28 | [30700] Train Loss: 2.562
+INFO | 2025-11-27 02:29:57 | [30800] Train Loss: 2.531
+INFO | 2025-11-27 02:31:27 | [30900] Train Loss: 2.625
+INFO | 2025-11-27 02:32:57 | [31000] Train Loss: 2.609
+INFO | 2025-11-27 02:34:28 | [31100] Train Loss: 2.578
+INFO | 2025-11-27 02:35:57 | [31200] Train Loss: 2.609
+INFO | 2025-11-27 02:37:27 | [31300] Train Loss: 2.594
+INFO | 2025-11-27 02:38:57 | [31400] Train Loss: 2.562
+INFO | 2025-11-27 02:40:27 | [31500] Train Loss: 2.547
+INFO | 2025-11-27 02:41:57 | [31600] Train Loss: 2.562
+INFO | 2025-11-27 02:43:27 | [31700] Train Loss: 2.531
+INFO | 2025-11-27 02:44:57 | [31800] Train Loss: 2.578
+INFO | 2025-11-27 02:46:26 | [31900] Train Loss: 2.609
+INFO | 2025-11-27 02:47:56 | [32000] Train Loss: 2.547
+INFO | 2025-11-27 02:47:56 | [32000] Saving checkpoint...
+INFO | 2025-11-27 02:49:48 | [32100] Train Loss: 2.547
+INFO | 2025-11-27 02:51:18 | [32200] Train Loss: 2.609
+INFO | 2025-11-27 02:52:48 | [32300] Train Loss: 2.547
+INFO | 2025-11-27 02:54:19 | [32400] Train Loss: 2.562
+INFO | 2025-11-27 02:55:49 | [32500] Train Loss: 2.547
+INFO | 2025-11-27 02:57:18 | [32600] Train Loss: 2.547
+INFO | 2025-11-27 02:58:48 | [32700] Train Loss: 2.578
+INFO | 2025-11-27 03:00:18 | [32800] Train Loss: 2.594
+INFO | 2025-11-27 03:01:48 | [32900] Train Loss: 2.562
+INFO | 2025-11-27 03:03:17 | [33000] Train Loss: 2.594
+INFO | 2025-11-27 03:04:47 | [33100] Train Loss: 2.594
+INFO | 2025-11-27 03:06:17 | [33200] Train Loss: 2.578
+INFO | 2025-11-27 03:07:47 | [33300] Train Loss: 2.562
+INFO | 2025-11-27 03:09:35 | [33400] Train Loss: 2.562
+INFO | 2025-11-27 03:11:06 | [33500] Train Loss: 2.594
+INFO | 2025-11-27 03:12:37 | [33600] Train Loss: 2.594
+INFO | 2025-11-27 03:14:08 | [33700] Train Loss: 2.609
+INFO | 2025-11-27 03:15:39 | [33800] Train Loss: 2.594
+INFO | 2025-11-27 03:17:08 | [33900] Train Loss: 2.578
+INFO | 2025-11-27 03:18:38 | [34000] Train Loss: 2.578
+INFO | 2025-11-27 03:18:38 | [34000] Saving checkpoint...
+INFO | 2025-11-27 03:20:15 | [34100] Train Loss: 2.562
+INFO | 2025-11-27 03:21:45 | [34200] Train Loss: 2.562
+INFO | 2025-11-27 03:23:15 | [34300] Train Loss: 2.547
+INFO | 2025-11-27 03:24:45 | [34400] Train Loss: 2.562
+INFO | 2025-11-27 03:26:15 | [34500] Train Loss: 2.562
+INFO | 2025-11-27 03:27:44 | [34600] Train Loss: 2.500
+INFO | 2025-11-27 03:29:31 | [34700] Train Loss: 2.609
+INFO | 2025-11-27 03:31:00 | [34800] Train Loss: 2.531
+INFO | 2025-11-27 03:32:30 | [34900] Train Loss: 2.578
+INFO | 2025-11-27 03:34:00 | [35000] Train Loss: 2.547
+INFO | 2025-11-27 03:35:31 | [35100] Train Loss: 2.594
+INFO | 2025-11-27 03:37:01 | [35200] Train Loss: 2.531
+INFO | 2025-11-27 03:38:31 | [35300] Train Loss: 2.531
+INFO | 2025-11-27 03:40:01 | [35400] Train Loss: 2.609
+INFO | 2025-11-27 03:41:30 | [35500] Train Loss: 2.578
+INFO | 2025-11-27 03:43:00 | [35600] Train Loss: 2.609
+INFO | 2025-11-27 03:44:30 | [35700] Train Loss: 2.562
+INFO | 2025-11-27 03:45:59 | [35800] Train Loss: 2.594
+INFO | 2025-11-27 03:47:29 | [35900] Train Loss: 2.562
+INFO | 2025-11-27 03:48:58 | [36000] Train Loss: 2.594
+INFO | 2025-11-27 03:48:58 | [36000] Saving checkpoint...
+INFO | 2025-11-27 03:50:52 | [36100] Train Loss: 2.500
+INFO | 2025-11-27 03:52:22 | [36200] Train Loss: 2.531
+INFO | 2025-11-27 03:53:52 | [36300] Train Loss: 2.547
+INFO | 2025-11-27 03:55:22 | [36400] Train Loss: 2.578
+INFO | 2025-11-27 03:56:52 | [36500] Train Loss: 2.578
+INFO | 2025-11-27 03:58:22 | [36600] Train Loss: 2.516
+INFO | 2025-11-27 03:59:52 | [36700] Train Loss: 2.531
+INFO | 2025-11-27 04:01:22 | [36800] Train Loss: 2.531
+INFO | 2025-11-27 04:02:52 | [36900] Train Loss: 2.562
+INFO | 2025-11-27 04:04:22 | [37000] Train Loss: 2.562
+INFO | 2025-11-27 04:05:51 | [37100] Train Loss: 2.578
+INFO | 2025-11-27 04:07:21 | [37200] Train Loss: 2.531
+INFO | 2025-11-27 04:08:51 | [37300] Train Loss: 2.594
+INFO | 2025-11-27 04:10:34 | [37400] Train Loss: 2.594
+INFO | 2025-11-27 04:12:04 | [37500] Train Loss: 2.562
+INFO | 2025-11-27 04:13:34 | [37600] Train Loss: 2.516
+INFO | 2025-11-27 04:15:04 | [37700] Train Loss: 2.594
+INFO | 2025-11-27 04:16:34 | [37800] Train Loss: 2.547
+INFO | 2025-11-27 04:18:04 | [37900] Train Loss: 2.562
+INFO | 2025-11-27 04:19:34 | [38000] Train Loss: 2.562
+INFO | 2025-11-27 04:19:34 | [38000] Saving checkpoint...
+INFO | 2025-11-27 04:21:15 | [38100] Train Loss: 2.547
+INFO | 2025-11-27 04:22:45 | [38200] Train Loss: 2.547
+INFO | 2025-11-27 04:24:16 | [38300] Train Loss: 2.641
+INFO | 2025-11-27 04:25:47 | [38400] Train Loss: 2.562
+INFO | 2025-11-27 04:27:17 | [38500] Train Loss: 2.562
+INFO | 2025-11-27 04:28:46 | [38600] Train Loss: 2.547
+INFO | 2025-11-27 04:30:32 | [38700] Train Loss: 2.531
+INFO | 2025-11-27 04:32:02 | [38800] Train Loss: 2.453
+INFO | 2025-11-27 04:33:32 | [38900] Train Loss: 2.531
+INFO | 2025-11-27 04:35:01 | [39000] Train Loss: 2.531
+INFO | 2025-11-27 04:36:32 | [39100] Train Loss: 2.531
+INFO | 2025-11-27 04:38:02 | [39200] Train Loss: 2.562
+INFO | 2025-11-27 04:39:32 | [39300] Train Loss: 2.531
+INFO | 2025-11-27 04:41:02 | [39400] Train Loss: 2.594
+INFO | 2025-11-27 04:42:31 | [39500] Train Loss: 2.516
+INFO | 2025-11-27 04:44:01 | [39600] Train Loss: 2.500
+INFO | 2025-11-27 04:45:31 | [39700] Train Loss: 2.469
+INFO | 2025-11-27 04:47:00 | [39800] Train Loss: 2.594
+INFO | 2025-11-27 04:48:30 | [39900] Train Loss: 2.594
+INFO | 2025-11-27 04:50:00 | [40000] Train Loss: 2.547
+INFO | 2025-11-27 04:50:00 | [40000] Saving checkpoint...
+INFO | 2025-11-27 04:50:07 | [40000] Evaluating loss...
+INFO | 2025-11-27 04:50:07 | [40000] Evaluation Loss: 3.562
+INFO | 2025-11-27 04:50:07 | [40000] Generating text...
+NFE: 1024: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.0/1.0 [11:35:44<00:00, 41744.05s/it]
+'(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')), '(Request ID: ab2ff54a-a898-489c-afad-7f0cec5f1b30)')' thrown while requesting HEAD https://huggingface.co/gpt2-large/resolve/main/config.json
+WARNING | 2025-11-27 16:25:51 | '(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')), '(Request ID: ab2ff54a-a898-489c-afad-7f0cec5f1b30)')' thrown while requesting HEAD https://huggingface.co/gpt2-large/resolve/main/config.json
+Retrying in 1s [Retry 1/5].
+WARNING | 2025-11-27 16:25:51 | Retrying in 1s [Retry 1/5].
+INFO | 2025-11-27 16:25:56 | [40000] Evaluation Perplexity: 309.811
+INFO | 2025-11-27 16:25:56 | [40000] Evaluation Entropy: 8.043
+INFO | 2025-11-27 16:27:27 | [40100] Train Loss: 2.547
+INFO | 2025-11-27 16:28:57 | [40200] Train Loss: 2.500
+INFO | 2025-11-27 16:30:26 | [40300] Train Loss: 2.562
+INFO | 2025-11-27 16:31:56 | [40400] Train Loss: 2.562
+INFO | 2025-11-27 16:33:26 | [40500] Train Loss: 2.531
+INFO | 2025-11-27 16:34:56 | [40600] Train Loss: 2.578
+INFO | 2025-11-27 16:36:26 | [40700] Train Loss: 2.562
+INFO | 2025-11-27 16:37:56 | [40800] Train Loss: 2.531
+INFO | 2025-11-27 16:39:26 | [40900] Train Loss: 2.578
+INFO | 2025-11-27 16:40:55 | [41000] Train Loss: 2.531
+INFO | 2025-11-27 16:42:41 | [41100] Train Loss: 2.547
+INFO | 2025-11-27 16:44:11 | [41200] Train Loss: 2.562
+INFO | 2025-11-27 16:45:41 | [41300] Train Loss: 2.562
+INFO | 2025-11-27 16:47:11 | [41400] Train Loss: 2.547
+INFO | 2025-11-27 16:48:41 | [41500] Train Loss: 2.531
+INFO | 2025-11-27 16:50:11 | [41600] Train Loss: 2.531
+INFO | 2025-11-27 16:51:41 | [41700] Train Loss: 2.547
+INFO | 2025-11-27 16:53:10 | [41800] Train Loss: 2.531
+INFO | 2025-11-27 16:54:41 | [41900] Train Loss: 2.531
+INFO | 2025-11-27 16:56:11 | [42000] Train Loss: 2.562
+INFO | 2025-11-27 16:56:11 | [42000] Saving checkpoint...
+INFO | 2025-11-27 16:57:49 | [42100] Train Loss: 2.547
+INFO | 2025-11-27 16:59:19 | [42200] Train Loss: 2.531
+INFO | 2025-11-27 17:00:49 | [42300] Train Loss: 2.547
+INFO | 2025-11-27 17:02:35 | [42400] Train Loss: 2.531
+INFO | 2025-11-27 17:04:05 | [42500] Train Loss: 2.531
+INFO | 2025-11-27 17:05:35 | [42600] Train Loss: 2.531
+INFO | 2025-11-27 17:07:07 | [42700] Train Loss: 2.547
+INFO | 2025-11-27 17:08:38 | [42800] Train Loss: 2.500
+INFO | 2025-11-27 17:10:09 | [42900] Train Loss: 2.484
+INFO | 2025-11-27 17:11:39 | [43000] Train Loss: 2.562
+INFO | 2025-11-27 17:13:09 | [43100] Train Loss: 2.516
+INFO | 2025-11-27 17:14:38 | [43200] Train Loss: 2.531
+INFO | 2025-11-27 17:16:08 | [43300] Train Loss: 2.531
+INFO | 2025-11-27 17:17:39 | [43400] Train Loss: 2.516
+INFO | 2025-11-27 17:19:09 | [43500] Train Loss: 2.578
+INFO | 2025-11-27 17:20:38 | [43600] Train Loss: 2.500
+INFO | 2025-11-27 17:22:23 | [43700] Train Loss: 2.531
+INFO | 2025-11-27 17:23:53 | [43800] Train Loss: 2.562
+INFO | 2025-11-27 17:25:22 | [43900] Train Loss: 2.484
+INFO | 2025-11-27 17:26:52 | [44000] Train Loss: 2.531
+INFO | 2025-11-27 17:26:52 | [44000] Saving checkpoint...
+INFO | 2025-11-27 17:28:31 | [44100] Train Loss: 2.500
+INFO | 2025-11-27 17:30:01 | [44200] Train Loss: 2.562
+INFO | 2025-11-27 17:31:30 | [44300] Train Loss: 2.578
+INFO | 2025-11-27 17:33:00 | [44400] Train Loss: 2.547
+INFO | 2025-11-27 17:34:30 | [44500] Train Loss: 2.500
+INFO | 2025-11-27 17:36:00 | [44600] Train Loss: 2.516
+INFO | 2025-11-27 17:37:30 | [44700] Train Loss: 2.531
+INFO | 2025-11-27 17:38:59 | [44800] Train Loss: 2.578
+INFO | 2025-11-27 17:40:29 | [44900] Train Loss: 2.594
+INFO | 2025-11-27 17:41:59 | [45000] Train Loss: 2.531
+INFO | 2025-11-27 17:43:46 | [45100] Train Loss: 2.547
+INFO | 2025-11-27 17:45:16 | [45200] Train Loss: 2.516
+INFO | 2025-11-27 17:46:46 | [45300] Train Loss: 2.562
+INFO | 2025-11-27 17:48:16 | [45400] Train Loss: 2.500
+INFO | 2025-11-27 17:49:46 | [45500] Train Loss: 2.547
+INFO | 2025-11-27 17:51:16 | [45600] Train Loss: 2.547
+INFO | 2025-11-27 17:52:45 | [45700] Train Loss: 2.484
+INFO | 2025-11-27 17:54:16 | [45800] Train Loss: 2.547
+INFO | 2025-11-27 17:55:45 | [45900] Train Loss: 2.547
+INFO | 2025-11-27 17:57:15 | [46000] Train Loss: 2.500
+INFO | 2025-11-27 17:57:15 | [46000] Saving checkpoint...
+INFO | 2025-11-27 17:58:53 | [46100] Train Loss: 2.500
+INFO | 2025-11-27 18:00:22 | [46200] Train Loss: 2.516
+INFO | 2025-11-27 18:01:52 | [46300] Train Loss: 2.516
+INFO | 2025-11-27 18:03:36 | [46400] Train Loss: 2.500
+INFO | 2025-11-27 18:05:06 | [46500] Train Loss: 2.531
+INFO | 2025-11-27 18:06:36 | [46600] Train Loss: 2.578
+INFO | 2025-11-27 18:08:07 | [46700] Train Loss: 2.500
+INFO | 2025-11-27 18:09:37 | [46800] Train Loss: 2.531
+INFO | 2025-11-27 18:11:07 | [46900] Train Loss: 2.531
+INFO | 2025-11-27 18:12:37 | [47000] Train Loss: 2.500
+INFO | 2025-11-27 18:14:07 | [47100] Train Loss: 2.578
+INFO | 2025-11-27 18:15:37 | [47200] Train Loss: 2.516
+INFO | 2025-11-27 18:17:06 | [47300] Train Loss: 2.547
+INFO | 2025-11-27 18:18:36 | [47400] Train Loss: 2.500
+INFO | 2025-11-27 18:20:07 | [47500] Train Loss: 2.547
+INFO | 2025-11-27 18:21:38 | [47600] Train Loss: 2.531
+INFO | 2025-11-27 18:23:26 | [47700] Train Loss: 2.562
+INFO | 2025-11-27 18:24:56 | [47800] Train Loss: 2.547
+INFO | 2025-11-27 18:26:27 | [47900] Train Loss: 2.531
+INFO | 2025-11-27 18:27:57 | [48000] Train Loss: 2.484
+INFO | 2025-11-27 18:27:57 | [48000] Saving checkpoint...
+INFO | 2025-11-27 18:29:35 | [48100] Train Loss: 2.531
+INFO | 2025-11-27 18:31:05 | [48200] Train Loss: 2.547
+INFO | 2025-11-27 18:32:35 | [48300] Train Loss: 2.516
+INFO | 2025-11-27 18:34:04 | [48400] Train Loss: 2.484
+INFO | 2025-11-27 18:35:34 | [48500] Train Loss: 2.531
+INFO | 2025-11-27 18:37:04 | [48600] Train Loss: 2.562
+INFO | 2025-11-27 18:38:34 | [48700] Train Loss: 2.469
+INFO | 2025-11-27 18:40:03 | [48800] Train Loss: 2.562
+INFO | 2025-11-27 18:41:33 | [48900] Train Loss: 2.531
+INFO | 2025-11-27 18:43:03 | [49000] Train Loss: 2.547
+INFO | 2025-11-27 18:44:49 | [49100] Train Loss: 2.531
+INFO | 2025-11-27 18:46:18 | [49200] Train Loss: 2.547
+INFO | 2025-11-27 18:47:48 | [49300] Train Loss: 2.516
+INFO | 2025-11-27 18:49:19 | [49400] Train Loss: 2.547
+INFO | 2025-11-27 18:50:48 | [49500] Train Loss: 2.516
+INFO | 2025-11-27 18:52:18 | [49600] Train Loss: 2.547
+INFO | 2025-11-27 18:53:48 | [49700] Train Loss: 2.516
+INFO | 2025-11-27 18:55:18 | [49800] Train Loss: 2.516
+INFO | 2025-11-27 18:56:48 | [49900] Train Loss: 2.547
+INFO | 2025-11-27 18:58:18 | [50000] Train Loss: 2.516
+INFO | 2025-11-27 18:58:18 | [50000] Saving checkpoint...
+INFO | 2025-11-27 18:59:55 | [50100] Train Loss: 2.453
+INFO | 2025-11-27 19:01:25 | [50200] Train Loss: 2.547
+INFO | 2025-11-27 19:02:55 | [50300] Train Loss: 2.469
+INFO | 2025-11-27 19:04:41 | [50400] Train Loss: 2.547
+INFO | 2025-11-27 19:06:11 | [50500] Train Loss: 2.531
+INFO | 2025-11-27 19:07:41 | [50600] Train Loss: 2.562
+INFO | 2025-11-27 19:09:11 | [50700] Train Loss: 2.500
+INFO | 2025-11-27 19:10:41 | [50800] Train Loss: 2.562
+INFO | 2025-11-27 19:12:11 | [50900] Train Loss: 2.516
+INFO | 2025-11-27 19:13:41 | [51000] Train Loss: 2.484
+INFO | 2025-11-27 19:15:11 | [51100] Train Loss: 2.562
+INFO | 2025-11-27 19:16:40 | [51200] Train Loss: 2.516
+INFO | 2025-11-27 19:18:11 | [51300] Train Loss: 2.469
+INFO | 2025-11-27 19:19:41 | [51400] Train Loss: 2.469
+INFO | 2025-11-27 19:21:11 | [51500] Train Loss: 2.516
+INFO | 2025-11-27 19:22:41 | [51600] Train Loss: 2.484
+INFO | 2025-11-27 19:24:27 | [51700] Train Loss: 2.547
+INFO | 2025-11-27 19:25:57 | [51800] Train Loss: 2.516
+INFO | 2025-11-27 19:27:26 | [51900] Train Loss: 2.500
+INFO | 2025-11-27 19:28:56 | [52000] Train Loss: 2.516
+INFO | 2025-11-27 19:28:56 | [52000] Saving checkpoint...
+INFO | 2025-11-27 19:30:34 | [52100] Train Loss: 2.531
+INFO | 2025-11-27 19:32:04 | [52200] Train Loss: 2.500
+INFO | 2025-11-27 19:33:34 | [52300] Train Loss: 2.500
+INFO | 2025-11-27 19:35:04 | [52400] Train Loss: 2.562
+INFO | 2025-11-27 19:36:35 | [52500] Train Loss: 2.547
+INFO | 2025-11-27 19:38:06 | [52600] Train Loss: 2.547
+INFO | 2025-11-27 19:39:36 | [52700] Train Loss: 2.516
+INFO | 2025-11-27 19:41:07 | [52800] Train Loss: 2.531
+INFO | 2025-11-27 19:42:38 | [52900] Train Loss: 2.484
+INFO | 2025-11-27 19:44:07 | [53000] Train Loss: 2.516
+INFO | 2025-11-27 19:45:53 | [53100] Train Loss: 2.500
+INFO | 2025-11-27 19:47:23 | [53200] Train Loss: 2.453
+INFO | 2025-11-27 19:48:53 | [53300] Train Loss: 2.484
+INFO | 2025-11-27 19:50:24 | [53400] Train Loss: 2.500
+INFO | 2025-11-27 19:51:53 | [53500] Train Loss: 2.547
+INFO | 2025-11-27 19:53:24 | [53600] Train Loss: 2.531
+INFO | 2025-11-27 19:54:53 | [53700] Train Loss: 2.500
+INFO | 2025-11-27 19:56:23 | [53800] Train Loss: 2.516
+INFO | 2025-11-27 19:57:53 | [53900] Train Loss: 2.547
+INFO | 2025-11-27 19:59:23 | [54000] Train Loss: 2.531
+INFO | 2025-11-27 19:59:23 | [54000] Saving checkpoint...
+INFO | 2025-11-27 20:01:00 | [54100] Train Loss: 2.562
+INFO | 2025-11-27 20:02:30 | [54200] Train Loss: 2.516
+INFO | 2025-11-27 20:04:00 | [54300] Train Loss: 2.562
+INFO | 2025-11-27 20:05:45 | [54400] Train Loss: 2.531
+INFO | 2025-11-27 20:07:15 | [54500] Train Loss: 2.500
+INFO | 2025-11-27 20:08:45 | [54600] Train Loss: 2.484
+INFO | 2025-11-27 20:10:15 | [54700] Train Loss: 2.531
+INFO | 2025-11-27 20:11:45 | [54800] Train Loss: 2.453
+INFO | 2025-11-27 20:13:14 | [54900] Train Loss: 2.547
+INFO | 2025-11-27 20:14:44 | [55000] Train Loss: 2.531
+INFO | 2025-11-27 20:16:14 | [55100] Train Loss: 2.516
+INFO | 2025-11-27 20:17:44 | [55200] Train Loss: 2.531
+INFO | 2025-11-27 20:19:14 | [55300] Train Loss: 2.500
+INFO | 2025-11-27 20:20:44 | [55400] Train Loss: 2.500
+INFO | 2025-11-27 20:22:13 | [55500] Train Loss: 2.500
+INFO | 2025-11-27 20:23:43 | [55600] Train Loss: 2.484
+INFO | 2025-11-27 20:25:27 | [55700] Train Loss: 2.531
+INFO | 2025-11-27 20:26:57 | [55800] Train Loss: 2.500
+INFO | 2025-11-27 20:28:27 | [55900] Train Loss: 2.500
+INFO | 2025-11-27 20:29:57 | [56000] Train Loss: 2.578
+INFO | 2025-11-27 20:29:57 | [56000] Saving checkpoint...
+INFO | 2025-11-27 20:31:35 | [56100] Train Loss: 2.469
+INFO | 2025-11-27 20:33:05 | [56200] Train Loss: 2.500
+INFO | 2025-11-27 20:34:35 | [56300] Train Loss: 2.500
+INFO | 2025-11-27 20:36:04 | [56400] Train Loss: 2.516
+INFO | 2025-11-27 20:37:34 | [56500] Train Loss: 2.531
+INFO | 2025-11-27 20:39:04 | [56600] Train Loss: 2.500
+INFO | 2025-11-27 20:40:34 | [56700] Train Loss: 2.531
+INFO | 2025-11-27 20:42:04 | [56800] Train Loss: 2.484
+INFO | 2025-11-27 20:43:34 | [56900] Train Loss: 2.516
+INFO | 2025-11-27 20:45:03 | [57000] Train Loss: 2.484
+INFO | 2025-11-27 20:46:49 | [57100] Train Loss: 2.516
+INFO | 2025-11-27 20:48:19 | [57200] Train Loss: 2.484
+INFO | 2025-11-27 20:49:49 | [57300] Train Loss: 2.500
+INFO | 2025-11-27 20:51:20 | [57400] Train Loss: 2.484
+INFO | 2025-11-27 20:52:50 | [57500] Train Loss: 2.469
+INFO | 2025-11-27 20:54:21 | [57600] Train Loss: 2.547
+INFO | 2025-11-27 20:55:51 | [57700] Train Loss: 2.469
+INFO | 2025-11-27 20:57:22 | [57800] Train Loss: 2.484
+INFO | 2025-11-27 20:58:52 | [57900] Train Loss: 2.469
+INFO | 2025-11-27 21:00:23 | [58000] Train Loss: 2.516
+INFO | 2025-11-27 21:00:23 | [58000] Saving checkpoint...
+INFO | 2025-11-27 21:02:00 | [58100] Train Loss: 2.531
+INFO | 2025-11-27 21:03:30 | [58200] Train Loss: 2.500
+INFO | 2025-11-27 21:05:00 | [58300] Train Loss: 2.531
+INFO | 2025-11-27 21:06:46 | [58400] Train Loss: 2.562
+INFO | 2025-11-27 21:08:16 | [58500] Train Loss: 2.531
+INFO | 2025-11-27 21:09:46 | [58600] Train Loss: 2.531
+INFO | 2025-11-27 21:11:17 | [58700] Train Loss: 2.516
+INFO | 2025-11-27 21:12:47 | [58800] Train Loss: 2.484
+INFO | 2025-11-27 21:14:16 | [58900] Train Loss: 2.562
+INFO | 2025-11-27 21:15:46 | [59000] Train Loss: 2.516
+INFO | 2025-11-27 21:17:16 | [59100] Train Loss: 2.469
+INFO | 2025-11-27 21:18:46 | [59200] Train Loss: 2.484
+INFO | 2025-11-27 21:20:15 | [59300] Train Loss: 2.500
+INFO | 2025-11-27 21:21:45 | [59400] Train Loss: 2.516
+INFO | 2025-11-27 21:23:15 | [59500] Train Loss: 2.516
+INFO | 2025-11-27 21:24:45 | [59600] Train Loss: 2.453
+INFO | 2025-11-27 21:26:31 | [59700] Train Loss: 2.562
+INFO | 2025-11-27 21:28:01 | [59800] Train Loss: 2.516
+INFO | 2025-11-27 21:29:31 | [59900] Train Loss: 2.500
+INFO | 2025-11-27 21:31:01 | [60000] Train Loss: 2.531
+INFO | 2025-11-27 21:31:01 | [60000] Saving checkpoint...
+INFO | 2025-11-27 21:31:08 | [60000] Evaluating loss...
+INFO | 2025-11-27 21:31:08 | [60000] Evaluation Loss: 3.125
+INFO | 2025-11-27 21:31:08 | [60000] Generating text...
+NFE: 1024: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.0/1.0 [28:19<00:00, 1699.51s/it]
+INFO | 2025-11-27 21:59:32 | [60000] Evaluation Perplexity: 204.540
+INFO | 2025-11-27 21:59:32 | [60000] Evaluation Entropy: 7.891
+INFO | 2025-11-27 22:01:01 | [60100] Train Loss: 2.547
+INFO | 2025-11-27 22:02:31 | [60200] Train Loss: 2.484
+INFO | 2025-11-27 22:04:01 | [60300] Train Loss: 2.531
+INFO | 2025-11-27 22:05:31 | [60400] Train Loss: 2.484
+INFO | 2025-11-27 22:07:18 | [60500] Train Loss: 2.547
+INFO | 2025-11-27 22:08:48 | [60600] Train Loss: 2.547
+INFO | 2025-11-27 22:10:18 | [60700] Train Loss: 2.469
+INFO | 2025-11-27 22:11:47 | [60800] Train Loss: 2.484
+INFO | 2025-11-27 22:13:18 | [60900] Train Loss: 2.469
+INFO | 2025-11-27 22:14:48 | [61000] Train Loss: 2.531
+INFO | 2025-11-27 22:16:17 | [61100] Train Loss: 2.484
+INFO | 2025-11-27 22:17:47 | [61200] Train Loss: 2.500
+INFO | 2025-11-27 22:19:17 | [61300] Train Loss: 2.484
+INFO | 2025-11-27 22:20:47 | [61400] Train Loss: 2.547
+INFO | 2025-11-27 22:22:17 | [61500] Train Loss: 2.500
+INFO | 2025-11-27 22:23:47 | [61600] Train Loss: 2.500
+INFO | 2025-11-27 22:25:17 | [61700] Train Loss: 2.547
+INFO | 2025-11-27 22:26:47 | [61800] Train Loss: 2.516
+INFO | 2025-11-27 22:28:30 | [61900] Train Loss: 2.484
+INFO | 2025-11-27 22:30:00 | [62000] Train Loss: 2.500
+INFO | 2025-11-27 22:30:00 | [62000] Saving checkpoint...
+INFO | 2025-11-27 22:31:37 | [62100] Train Loss: 2.484
+INFO | 2025-11-27 22:33:07 | [62200] Train Loss: 2.469
+INFO | 2025-11-27 22:34:37 | [62300] Train Loss: 2.516
+INFO | 2025-11-27 22:36:07 | [62400] Train Loss: 2.469
+INFO | 2025-11-27 22:37:38 | [62500] Train Loss: 2.516
+INFO | 2025-11-27 22:39:09 | [62600] Train Loss: 2.594
+INFO | 2025-11-27 22:40:39 | [62700] Train Loss: 2.484
+INFO | 2025-11-27 22:42:09 | [62800] Train Loss: 2.500
+INFO | 2025-11-27 22:43:40 | [62900] Train Loss: 2.500
+INFO | 2025-11-27 22:45:11 | [63000] Train Loss: 2.531
+INFO | 2025-11-27 22:46:40 | [63100] Train Loss: 2.469
+INFO | 2025-11-27 22:48:26 | [63200] Train Loss: 2.453
+INFO | 2025-11-27 22:49:56 | [63300] Train Loss: 2.516
+INFO | 2025-11-27 22:51:26 | [63400] Train Loss: 2.500
+INFO | 2025-11-27 22:52:57 | [63500] Train Loss: 2.531
+INFO | 2025-11-27 22:54:26 | [63600] Train Loss: 2.453
+INFO | 2025-11-27 22:55:56 | [63700] Train Loss: 2.500
+INFO | 2025-11-27 22:57:26 | [63800] Train Loss: 2.516
+INFO | 2025-11-27 22:58:56 | [63900] Train Loss: 2.500
+INFO | 2025-11-27 23:00:26 | [64000] Train Loss: 2.516
+INFO | 2025-11-27 23:00:26 | [64000] Saving checkpoint...
+INFO | 2025-11-27 23:02:03 | [64100] Train Loss: 2.469
+INFO | 2025-11-27 23:03:32 | [64200] Train Loss: 2.453
+INFO | 2025-11-27 23:05:02 | [64300] Train Loss: 2.500
+INFO | 2025-11-27 23:06:32 | [64400] Train Loss: 2.453
+INFO | 2025-11-27 23:08:18 | [64500] Train Loss: 2.547
+INFO | 2025-11-27 23:09:48 | [64600] Train Loss: 2.500
+INFO | 2025-11-27 23:11:18 | [64700] Train Loss: 2.453
+INFO | 2025-11-27 23:12:48 | [64800] Train Loss: 2.547
+INFO | 2025-11-27 23:14:19 | [64900] Train Loss: 2.531
+INFO | 2025-11-27 23:15:49 | [65000] Train Loss: 2.500
+INFO | 2025-11-27 23:17:18 | [65100] Train Loss: 2.500
+INFO | 2025-11-27 23:18:49 | [65200] Train Loss: 2.531
+INFO | 2025-11-27 23:20:19 | [65300] Train Loss: 2.500
+INFO | 2025-11-27 23:21:49 | [65400] Train Loss: 2.453
+INFO | 2025-11-27 23:23:19 | [65500] Train Loss: 2.484
+INFO | 2025-11-27 23:24:48 | [65600] Train Loss: 2.516
+INFO | 2025-11-27 23:26:18 | [65700] Train Loss: 2.484
+INFO | 2025-11-27 23:27:48 | [65800] Train Loss: 2.469
+INFO | 2025-11-27 23:29:31 | [65900] Train Loss: 2.500
+INFO | 2025-11-27 23:31:01 | [66000] Train Loss: 2.438
+INFO | 2025-11-27 23:31:01 | [66000] Saving checkpoint...
+INFO | 2025-11-27 23:32:38 | [66100] Train Loss: 2.453
+INFO | 2025-11-27 23:34:09 | [66200] Train Loss: 2.500
+INFO | 2025-11-27 23:35:39 | [66300] Train Loss: 2.500
+INFO | 2025-11-27 23:37:08 | [66400] Train Loss: 2.516
+INFO | 2025-11-27 23:38:38 | [66500] Train Loss: 2.500
+INFO | 2025-11-27 23:40:08 | [66600] Train Loss: 2.469
+INFO | 2025-11-27 23:41:38 | [66700] Train Loss: 2.500
+INFO | 2025-11-27 23:43:07 | [66800] Train Loss: 2.484
+INFO | 2025-11-27 23:44:37 | [66900] Train Loss: 2.469
+INFO | 2025-11-27 23:46:07 | [67000] Train Loss: 2.438
+INFO | 2025-11-27 23:47:37 | [67100] Train Loss: 2.516
+INFO | 2025-11-27 23:49:24 | [67200] Train Loss: 2.484
+INFO | 2025-11-27 23:50:53 | [67300] Train Loss: 2.516
+INFO | 2025-11-27 23:52:23 | [67400] Train Loss: 2.531
+INFO | 2025-11-27 23:53:54 | [67500] Train Loss: 2.484
+INFO | 2025-11-27 23:55:23 | [67600] Train Loss: 2.516
+INFO | 2025-11-27 23:56:53 | [67700] Train Loss: 2.531
+INFO | 2025-11-27 23:58:25 | [67800] Train Loss: 2.484
+INFO | 2025-11-27 23:59:55 | [67900] Train Loss: 2.484
+INFO | 2025-11-28 00:01:26 | [68000] Train Loss: 2.531
+INFO | 2025-11-28 00:01:26 | [68000] Saving checkpoint...
+INFO | 2025-11-28 00:03:03 | [68100] Train Loss: 2.484
+INFO | 2025-11-28 00:04:34 | [68200] Train Loss: 2.438
+INFO | 2025-11-28 00:06:04 | [68300] Train Loss: 2.500
+INFO | 2025-11-28 00:07:33 | [68400] Train Loss: 2.484
+INFO | 2025-11-28 00:09:20 | [68500] Train Loss: 2.516
+INFO | 2025-11-28 00:10:49 | [68600] Train Loss: 2.531
+INFO | 2025-11-28 00:12:19 | [68700] Train Loss: 2.500
+INFO | 2025-11-28 00:13:49 | [68800] Train Loss: 2.438
+INFO | 2025-11-28 00:15:20 | [68900] Train Loss: 2.484
+INFO | 2025-11-28 00:16:50 | [69000] Train Loss: 2.578
+INFO | 2025-11-28 00:18:20 | [69100] Train Loss: 2.516
+INFO | 2025-11-28 00:19:49 | [69200] Train Loss: 2.500
+INFO | 2025-11-28 00:21:19 | [69300] Train Loss: 2.469
+INFO | 2025-11-28 00:22:49 | [69400] Train Loss: 2.531
+INFO | 2025-11-28 00:24:19 | [69500] Train Loss: 2.484
+INFO | 2025-11-28 00:25:49 | [69600] Train Loss: 2.531
+INFO | 2025-11-28 00:27:18 | [69700] Train Loss: 2.469
+INFO | 2025-11-28 00:28:48 | [69800] Train Loss: 2.469
+INFO | 2025-11-28 00:30:34 | [69900] Train Loss: 2.469
+INFO | 2025-11-28 00:32:05 | [70000] Train Loss: 2.500
+INFO | 2025-11-28 00:32:05 | [70000] Saving checkpoint...
+INFO | 2025-11-28 00:33:42 | [70100] Train Loss: 2.438
+INFO | 2025-11-28 00:35:13 | [70200] Train Loss: 2.562
+INFO | 2025-11-28 00:36:42 | [70300] Train Loss: 2.484
+INFO | 2025-11-28 00:38:13 | [70400] Train Loss: 2.500
+INFO | 2025-11-28 00:39:43 | [70500] Train Loss: 2.469
+INFO | 2025-11-28 00:41:13 | [70600] Train Loss: 2.516
+INFO | 2025-11-28 00:42:42 | [70700] Train Loss: 2.484
+INFO | 2025-11-28 00:44:12 | [70800] Train Loss: 2.469
+INFO | 2025-11-28 00:45:42 | [70900] Train Loss: 2.516
+INFO | 2025-11-28 00:47:12 | [71000] Train Loss: 2.531
+INFO | 2025-11-28 00:48:42 | [71100] Train Loss: 2.469
+INFO | 2025-11-28 00:50:27 | [71200] Train Loss: 2.469
+INFO | 2025-11-28 00:51:57 | [71300] Train Loss: 2.438
+INFO | 2025-11-28 00:53:27 | [71400] Train Loss: 2.516
+INFO | 2025-11-28 00:54:58 | [71500] Train Loss: 2.469
+INFO | 2025-11-28 00:56:27 | [71600] Train Loss: 2.484
+INFO | 2025-11-28 00:57:58 | [71700] Train Loss: 2.531
+INFO | 2025-11-28 00:59:27 | [71800] Train Loss: 2.469
+INFO | 2025-11-28 01:00:57 | [71900] Train Loss: 2.516
+INFO | 2025-11-28 01:02:27 | [72000] Train Loss: 2.438
+INFO | 2025-11-28 01:02:27 | [72000] Saving checkpoint...
+INFO | 2025-11-28 01:04:04 | [72100] Train Loss: 2.500
+INFO | 2025-11-28 01:05:33 | [72200] Train Loss: 2.469
+INFO | 2025-11-28 01:07:03 | [72300] Train Loss: 2.484
+INFO | 2025-11-28 01:08:33 | [72400] Train Loss: 2.453
+INFO | 2025-11-28 01:10:19 | [72500] Train Loss: 2.516
+INFO | 2025-11-28 01:11:48 | [72600] Train Loss: 2.438
+INFO | 2025-11-28 01:13:18 | [72700] Train Loss: 2.484
+INFO | 2025-11-28 01:14:48 | [72800] Train Loss: 2.453
+INFO | 2025-11-28 01:16:19 | [72900] Train Loss: 2.469
+INFO | 2025-11-28 01:17:49 | [73000] Train Loss: 2.484
+INFO | 2025-11-28 01:19:21 | [73100] Train Loss: 2.500
+INFO | 2025-11-28 01:20:51 | [73200] Train Loss: 2.484
+INFO | 2025-11-28 01:22:22 | [73300] Train Loss: 2.516
+INFO | 2025-11-28 01:23:52 | [73400] Train Loss: 2.500
+INFO | 2025-11-28 01:25:23 | [73500] Train Loss: 2.547
+INFO | 2025-11-28 01:26:53 | [73600] Train Loss: 2.469
+INFO | 2025-11-28 01:28:23 | [73700] Train Loss: 2.438
+INFO | 2025-11-28 01:29:53 | [73800] Train Loss: 2.453
+INFO | 2025-11-28 01:31:39 | [73900] Train Loss: 2.484
+INFO | 2025-11-28 01:33:09 | [74000] Train Loss: 2.469
+INFO | 2025-11-28 01:33:09 | [74000] Saving checkpoint...
+INFO | 2025-11-28 01:34:46 | [74100] Train Loss: 2.516
+INFO | 2025-11-28 01:36:16 | [74200] Train Loss: 2.500
+INFO | 2025-11-28 01:37:46 | [74300] Train Loss: 2.500
+INFO | 2025-11-28 01:39:16 | [74400] Train Loss: 2.469
+INFO | 2025-11-28 01:40:46 | [74500] Train Loss: 2.484
+INFO | 2025-11-28 01:42:15 | [74600] Train Loss: 2.484
+INFO | 2025-11-28 01:43:45 | [74700] Train Loss: 2.453
+INFO | 2025-11-28 01:45:15 | [74800] Train Loss: 2.469
+INFO | 2025-11-28 01:46:45 | [74900] Train Loss: 2.516
+INFO | 2025-11-28 01:48:15 | [75000] Train Loss: 2.484
+INFO | 2025-11-28 01:49:45 | [75100] Train Loss: 2.531
+INFO | 2025-11-28 01:51:31 | [75200] Train Loss: 2.484
+INFO | 2025-11-28 01:53:01 | [75300] Train Loss: 2.500
+INFO | 2025-11-28 01:54:31 | [75400] Train Loss: 2.469
+INFO | 2025-11-28 01:56:01 | [75500] Train Loss: 2.484
+INFO | 2025-11-28 01:57:31 | [75600] Train Loss: 2.469
+INFO | 2025-11-28 01:59:01 | [75700] Train Loss: 2.438
+INFO | 2025-11-28 02:00:31 | [75800] Train Loss: 2.469
+INFO | 2025-11-28 02:02:01 | [75900] Train Loss: 2.469
+INFO | 2025-11-28 02:03:30 | [76000] Train Loss: 2.531
+INFO | 2025-11-28 02:03:30 | [76000] Saving checkpoint...
+INFO | 2025-11-28 02:05:07 | [76100] Train Loss: 2.453
+INFO | 2025-11-28 02:06:37 | [76200] Train Loss: 2.516
+INFO | 2025-11-28 02:08:07 | [76300] Train Loss: 2.469
+INFO | 2025-11-28 02:09:37 | [76400] Train Loss: 2.516
+INFO | 2025-11-28 02:11:24 | [76500] Train Loss: 2.500
+INFO | 2025-11-28 02:12:54 | [76600] Train Loss: 2.500
+INFO | 2025-11-28 02:14:23 | [76700] Train Loss: 2.500
+INFO | 2025-11-28 02:15:53 | [76800] Train Loss: 2.531
+INFO | 2025-11-28 02:17:23 | [76900] Train Loss: 2.469
+INFO | 2025-11-28 02:18:53 | [77000] Train Loss: 2.453
+INFO | 2025-11-28 02:20:23 | [77100] Train Loss: 2.453
+INFO | 2025-11-28 02:21:53 | [77200] Train Loss: 2.469
+INFO | 2025-11-28 02:23:23 | [77300] Train Loss: 2.516
+INFO | 2025-11-28 02:24:53 | [77400] Train Loss: 2.516
+INFO | 2025-11-28 02:26:23 | [77500] Train Loss: 2.516
+INFO | 2025-11-28 02:27:53 | [77600] Train Loss: 2.516
+INFO | 2025-11-28 02:29:23 | [77700] Train Loss: 2.500
+INFO | 2025-11-28 02:30:53 | [77800] Train Loss: 2.453
+INFO | 2025-11-28 02:32:36 | [77900] Train Loss: 2.484
+INFO | 2025-11-28 02:34:06 | [78000] Train Loss: 2.484
+INFO | 2025-11-28 02:34:06 | [78000] Saving checkpoint...
+INFO | 2025-11-28 02:35:43 | [78100] Train Loss: 2.438
+INFO | 2025-11-28 02:37:14 | [78200] Train Loss: 2.500
+INFO | 2025-11-28 02:38:43 | [78300] Train Loss: 2.469
+INFO | 2025-11-28 02:40:13 | [78400] Train Loss: 2.500
+INFO | 2025-11-28 02:41:43 | [78500] Train Loss: 2.469
+INFO | 2025-11-28 02:43:15 | [78600] Train Loss: 2.453
+INFO | 2025-11-28 02:44:45 | [78700] Train Loss: 2.438
+INFO | 2025-11-28 02:46:16 | [78800] Train Loss: 2.484
+INFO | 2025-11-28 02:47:46 | [78900] Train Loss: 2.484
+INFO | 2025-11-28 02:49:16 | [79000] Train Loss: 2.453
+INFO | 2025-11-28 02:50:47 | [79100] Train Loss: 2.531
+INFO | 2025-11-28 02:52:30 | [79200] Train Loss: 2.438
+INFO | 2025-11-28 02:54:00 | [79300] Train Loss: 2.453
+INFO | 2025-11-28 02:55:30 | [79400] Train Loss: 2.453
+INFO | 2025-11-28 02:57:00 | [79500] Train Loss: 2.500
+INFO | 2025-11-28 02:58:30 | [79600] Train Loss: 2.469
+INFO | 2025-11-28 03:00:00 | [79700] Train Loss: 2.469
+INFO | 2025-11-28 03:01:30 | [79800] Train Loss: 2.453
+INFO | 2025-11-28 03:03:00 | [79900] Train Loss: 2.469
+INFO | 2025-11-28 03:04:30 | [80000] Train Loss: 2.484
+INFO | 2025-11-28 03:04:30 | [80000] Saving checkpoint...
+INFO | 2025-11-28 03:04:37 | [80000] Evaluating loss...
+INFO | 2025-11-28 03:04:37 | [80000] Evaluation Loss: 2.266
+INFO | 2025-11-28 03:04:37 | [80000] Generating text...
+NFE: 1024: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.0/1.0 [35:47<00:00, 2147.63s/it]
+INFO | 2025-11-28 03:40:28 | [80000] Evaluation Perplexity: 211.904
+INFO | 2025-11-28 03:40:28 | [80000] Evaluation Entropy: 7.968
+INFO | 2025-11-28 03:41:58 | [80100] Train Loss: 2.469
+INFO | 2025-11-28 03:43:28 | [80200] Train Loss: 2.500
+INFO | 2025-11-28 03:44:57 | [80300] Train Loss: 2.516
+INFO | 2025-11-28 03:46:27 | [80400] Train Loss: 2.484
+INFO | 2025-11-28 03:47:57 | [80500] Train Loss: 2.531
+INFO | 2025-11-28 03:49:27 | [80600] Train Loss: 2.469
+INFO | 2025-11-28 03:50:56 | [80700] Train Loss: 2.484
+INFO | 2025-11-28 03:52:42 | [80800] Train Loss: 2.500
+INFO | 2025-11-28 03:54:12 | [80900] Train Loss: 2.406
+INFO | 2025-11-28 03:55:42 | [81000] Train Loss: 2.500
+INFO | 2025-11-28 03:57:11 | [81100] Train Loss: 2.453
+INFO | 2025-11-28 03:58:42 | [81200] Train Loss: 2.469
+INFO | 2025-11-28 04:00:12 | [81300] Train Loss: 2.484
+INFO | 2025-11-28 04:01:41 | [81400] Train Loss: 2.484
+INFO | 2025-11-28 04:03:11 | [81500] Train Loss: 2.531
+INFO | 2025-11-28 04:04:41 | [81600] Train Loss: 2.500
+INFO | 2025-11-28 04:06:11 | [81700] Train Loss: 2.453
+INFO | 2025-11-28 04:07:40 | [81800] Train Loss: 2.484
+INFO | 2025-11-28 04:09:10 | [81900] Train Loss: 2.516
+INFO | 2025-11-28 04:10:40 | [82000] Train Loss: 2.453
+INFO | 2025-11-28 04:10:40 | [82000] Saving checkpoint...
+INFO | 2025-11-28 04:12:17 | [82100] Train Loss: 2.484
+INFO | 2025-11-28 04:14:03 | [82200] Train Loss: 2.516
+INFO | 2025-11-28 04:15:32 | [82300] Train Loss: 2.484
+INFO | 2025-11-28 04:17:02 | [82400] Train Loss: 2.484
+INFO | 2025-11-28 04:18:33 | [82500] Train Loss: 2.500
+INFO | 2025-11-28 04:20:03 | [82600] Train Loss: 2.531
+INFO | 2025-11-28 04:21:33 | [82700] Train Loss: 2.516
+INFO | 2025-11-28 04:23:02 | [82800] Train Loss: 2.453
+INFO | 2025-11-28 04:24:32 | [82900] Train Loss: 2.469
+INFO | 2025-11-28 04:26:02 | [83000] Train Loss: 2.453
+INFO | 2025-11-28 04:27:32 | [83100] Train Loss: 2.484
+INFO | 2025-11-28 04:29:01 | [83200] Train Loss: 2.453
+INFO | 2025-11-28 04:30:31 | [83300] Train Loss: 2.453
+INFO | 2025-11-28 04:32:01 | [83400] Train Loss: 2.469
+INFO | 2025-11-28 04:33:46 | [83500] Train Loss: 2.453
+INFO | 2025-11-28 04:35:16 | [83600] Train Loss: 2.516
+INFO | 2025-11-28 04:36:46 | [83700] Train Loss: 2.438
+INFO | 2025-11-28 04:38:16 | [83800] Train Loss: 2.469
+INFO | 2025-11-28 04:39:48 | [83900] Train Loss: 2.484
+INFO | 2025-11-28 04:41:19 | [84000] Train Loss: 2.469
+INFO | 2025-11-28 04:41:19 | [84000] Saving checkpoint...
+INFO | 2025-11-28 04:42:56 | [84100] Train Loss: 2.484
+INFO | 2025-11-28 04:44:26 | [84200] Train Loss: 2.469
+INFO | 2025-11-28 04:45:56 | [84300] Train Loss: 2.422
+INFO | 2025-11-28 04:47:26 | [84400] Train Loss: 2.469
+INFO | 2025-11-28 04:48:57 | [84500] Train Loss: 2.469
+INFO | 2025-11-28 04:50:27 | [84600] Train Loss: 2.422
+INFO | 2025-11-28 04:51:57 | [84700] Train Loss: 2.484
+INFO | 2025-11-28 04:53:43 | [84800] Train Loss: 2.500
+INFO | 2025-11-28 04:55:14 | [84900] Train Loss: 2.453
+INFO | 2025-11-28 04:56:44 | [85000] Train Loss: 2.453
+INFO | 2025-11-28 04:58:13 | [85100] Train Loss: 2.500
+INFO | 2025-11-28 04:59:44 | [85200] Train Loss: 2.484
+INFO | 2025-11-28 05:01:14 | [85300] Train Loss: 2.453
+INFO | 2025-11-28 05:02:44 | [85400] Train Loss: 2.391
+INFO | 2025-11-28 05:04:13 | [85500] Train Loss: 2.500
+INFO | 2025-11-28 05:05:43 | [85600] Train Loss: 2.469
+INFO | 2025-11-28 05:07:13 | [85700] Train Loss: 2.453
+INFO | 2025-11-28 05:08:43 | [85800] Train Loss: 2.500
+INFO | 2025-11-28 05:10:12 | [85900] Train Loss: 2.484
+INFO | 2025-11-28 05:11:42 | [86000] Train Loss: 2.516
+INFO | 2025-11-28 05:11:42 | [86000] Saving checkpoint...
+INFO | 2025-11-28 05:13:19 | [86100] Train Loss: 2.453
+INFO | 2025-11-28 05:15:04 | [86200] Train Loss: 2.484
+INFO | 2025-11-28 05:16:34 | [86300] Train Loss: 2.438
+INFO | 2025-11-28 05:18:04 | [86400] Train Loss: 2.453
+INFO | 2025-11-28 05:19:35 | [86500] Train Loss: 2.469
+INFO | 2025-11-28 05:21:05 | [86600] Train Loss: 2.516
+INFO | 2025-11-28 05:22:35 | [86700] Train Loss: 2.484
+INFO | 2025-11-28 05:24:05 | [86800] Train Loss: 2.422
+INFO | 2025-11-28 05:25:35 | [86900] Train Loss: 2.484
+INFO | 2025-11-28 05:27:04 | [87000] Train Loss: 2.469
+INFO | 2025-11-28 05:28:34 | [87100] Train Loss: 2.531
+INFO | 2025-11-28 05:30:04 | [87200] Train Loss: 2.484
+INFO | 2025-11-28 05:31:34 | [87300] Train Loss: 2.438
+INFO | 2025-11-28 05:33:03 | [87400] Train Loss: 2.484
+INFO | 2025-11-28 05:34:48 | [87500] Train Loss: 2.484
+INFO | 2025-11-28 05:36:17 | [87600] Train Loss: 2.469
+INFO | 2025-11-28 05:37:47 | [87700] Train Loss: 2.453
+INFO | 2025-11-28 05:39:17 | [87800] Train Loss: 2.438
+INFO | 2025-11-28 05:40:47 | [87900] Train Loss: 2.469
+INFO | 2025-11-28 05:42:17 | [88000] Train Loss: 2.453
+INFO | 2025-11-28 05:42:17 | [88000] Saving checkpoint...
+INFO | 2025-11-28 05:43:54 | [88100] Train Loss: 2.438
+INFO | 2025-11-28 05:45:24 | [88200] Train Loss: 2.469
+INFO | 2025-11-28 05:46:53 | [88300] Train Loss: 2.469
+INFO | 2025-11-28 05:48:23 | [88400] Train Loss: 2.453
+INFO | 2025-11-28 05:49:53 | [88500] Train Loss: 2.500
+INFO | 2025-11-28 05:51:23 | [88600] Train Loss: 2.469
+INFO | 2025-11-28 05:52:53 | [88700] Train Loss: 2.484
+INFO | 2025-11-28 05:54:39 | [88800] Train Loss: 2.469
+INFO | 2025-11-28 05:56:08 | [88900] Train Loss: 2.469
+INFO | 2025-11-28 05:57:38 | [89000] Train Loss: 2.406
+INFO | 2025-11-28 05:59:08 | [89100] Train Loss: 2.531
+INFO | 2025-11-28 06:00:39 | [89200] Train Loss: 2.469
+INFO | 2025-11-28 06:02:08 | [89300] Train Loss: 2.484
+INFO | 2025-11-28 06:03:38 | [89400] Train Loss: 2.453
+INFO | 2025-11-28 06:05:08 | [89500] Train Loss: 2.469
+INFO | 2025-11-28 06:06:39 | [89600] Train Loss: 2.500
+INFO | 2025-11-28 06:08:10 | [89700] Train Loss: 2.500
+INFO | 2025-11-28 06:09:40 | [89800] Train Loss: 2.438
+INFO | 2025-11-28 06:11:11 | [89900] Train Loss: 2.500
+INFO | 2025-11-28 06:12:40 | [90000] Train Loss: 2.422
+INFO | 2025-11-28 06:12:40 | [90000] Saving checkpoint...
+INFO | 2025-11-28 06:14:19 | [90100] Train Loss: 2.500
+INFO | 2025-11-28 06:16:06 | [90200] Train Loss: 2.438
+INFO | 2025-11-28 06:17:36 | [90300] Train Loss: 2.438
+INFO | 2025-11-28 06:19:06 | [90400] Train Loss: 2.500
+INFO | 2025-11-28 06:20:36 | [90500] Train Loss: 2.469
+INFO | 2025-11-28 06:22:06 | [90600] Train Loss: 2.469
+INFO | 2025-11-28 06:23:36 | [90700] Train Loss: 2.422
+INFO | 2025-11-28 06:25:06 | [90800] Train Loss: 2.422
+INFO | 2025-11-28 06:26:36 | [90900] Train Loss: 2.484
+INFO | 2025-11-28 06:28:06 | [91000] Train Loss: 2.469
+INFO | 2025-11-28 06:29:36 | [91100] Train Loss: 2.500
+INFO | 2025-11-28 06:31:05 | [91200] Train Loss: 2.469
+INFO | 2025-11-28 06:32:35 | [91300] Train Loss: 2.484
+INFO | 2025-11-28 06:34:04 | [91400] Train Loss: 2.469
+INFO | 2025-11-28 06:35:50 | [91500] Train Loss: 2.484
+INFO | 2025-11-28 06:37:20 | [91600] Train Loss: 2.438
+INFO | 2025-11-28 06:38:50 | [91700] Train Loss: 2.453
+INFO | 2025-11-28 06:40:20 | [91800] Train Loss: 2.516
+INFO | 2025-11-28 06:41:50 | [91900] Train Loss: 2.453
+INFO | 2025-11-28 06:43:19 | [92000] Train Loss: 2.438
+INFO | 2025-11-28 06:43:19 | [92000] Saving checkpoint...
+INFO | 2025-11-28 06:44:56 | [92100] Train Loss: 2.484
+INFO | 2025-11-28 06:46:26 | [92200] Train Loss: 2.469
+INFO | 2025-11-28 06:47:56 | [92300] Train Loss: 2.453
+INFO | 2025-11-28 06:49:26 | [92400] Train Loss: 2.469
+INFO | 2025-11-28 06:50:55 | [92500] Train Loss: 2.469
+INFO | 2025-11-28 06:52:25 | [92600] Train Loss: 2.406
+INFO | 2025-11-28 06:53:55 | [92700] Train Loss: 2.500
+INFO | 2025-11-28 06:55:41 | [92800] Train Loss: 2.484
+INFO | 2025-11-28 06:57:11 | [92900] Train Loss: 2.453
+INFO | 2025-11-28 06:58:41 | [93000] Train Loss: 2.453
+INFO | 2025-11-28 07:00:11 | [93100] Train Loss: 2.484
+INFO | 2025-11-28 07:01:41 | [93200] Train Loss: 2.469
+INFO | 2025-11-28 07:03:11 | [93300] Train Loss: 2.484
+INFO | 2025-11-28 07:04:41 | [93400] Train Loss: 2.484
+INFO | 2025-11-28 07:06:11 | [93500] Train Loss: 2.500
+INFO | 2025-11-28 07:07:41 | [93600] Train Loss: 2.406
+INFO | 2025-11-28 07:09:10 | [93700] Train Loss: 2.453
+INFO | 2025-11-28 07:10:40 | [93800] Train Loss: 2.453
+INFO | 2025-11-28 07:12:10 | [93900] Train Loss: 2.469
+INFO | 2025-11-28 07:13:40 | [94000] Train Loss: 2.469
+INFO | 2025-11-28 07:13:40 | [94000] Saving checkpoint...
+INFO | 2025-11-28 07:15:17 | [94100] Train Loss: 2.516
+INFO | 2025-11-28 07:17:03 | [94200] Train Loss: 2.469
+INFO | 2025-11-28 07:18:32 | [94300] Train Loss: 2.469
+INFO | 2025-11-28 07:20:02 | [94400] Train Loss: 2.484
+INFO | 2025-11-28 07:21:33 | [94500] Train Loss: 2.422
+INFO | 2025-11-28 07:23:02 | [94600] Train Loss: 2.438
+INFO | 2025-11-28 07:24:32 | [94700] Train Loss: 2.531
+INFO | 2025-11-28 07:26:02 | [94800] Train Loss: 2.469
+INFO | 2025-11-28 07:27:32 | [94900] Train Loss: 2.469
+INFO | 2025-11-28 07:29:02 | [95000] Train Loss: 2.438
+INFO | 2025-11-28 07:30:32 | [95100] Train Loss: 2.469
+INFO | 2025-11-28 07:32:01 | [95200] Train Loss: 2.484
+INFO | 2025-11-28 07:33:31 | [95300] Train Loss: 2.484
+INFO | 2025-11-28 07:35:05 | [95400] Train Loss: 2.469
+INFO | 2025-11-28 07:36:51 | [95500] Train Loss: 2.438
+INFO | 2025-11-28 07:38:21 | [95600] Train Loss: 2.500
+INFO | 2025-11-28 07:39:51 | [95700] Train Loss: 2.516
+INFO | 2025-11-28 07:41:22 | [95800] Train Loss: 2.453
+INFO | 2025-11-28 07:42:53 | [95900] Train Loss: 2.469
+INFO | 2025-11-28 07:44:23 | [96000] Train Loss: 2.438
+INFO | 2025-11-28 07:44:23 | [96000] Saving checkpoint...
+INFO | 2025-11-28 07:46:00 | [96100] Train Loss: 2.531
+INFO | 2025-11-28 07:47:31 | [96200] Train Loss: 2.422
+INFO | 2025-11-28 07:49:00 | [96300] Train Loss: 2.484
+INFO | 2025-11-28 07:50:30 | [96400] Train Loss: 2.469
+INFO | 2025-11-28 07:51:59 | [96500] Train Loss: 2.500
+INFO | 2025-11-28 07:53:29 | [96600] Train Loss: 2.453
+INFO | 2025-11-28 07:54:59 | [96700] Train Loss: 2.469
+INFO | 2025-11-28 07:56:45 | [96800] Train Loss: 2.500
+INFO | 2025-11-28 07:58:15 | [96900] Train Loss: 2.453
+INFO | 2025-11-28 07:59:45 | [97000] Train Loss: 2.500
+INFO | 2025-11-28 08:01:15 | [97100] Train Loss: 2.438
+INFO | 2025-11-28 08:02:45 | [97200] Train Loss: 2.516
+INFO | 2025-11-28 08:04:15 | [97300] Train Loss: 2.484
+INFO | 2025-11-28 08:05:45 | [97400] Train Loss: 2.469
+INFO | 2025-11-28 08:07:15 | [97500] Train Loss: 2.469
+INFO | 2025-11-28 08:08:45 | [97600] Train Loss: 2.516
+INFO | 2025-11-28 08:10:14 | [97700] Train Loss: 2.484
+INFO | 2025-11-28 08:11:44 | [97800] Train Loss: 2.438
+INFO | 2025-11-28 08:13:13 | [97900] Train Loss: 2.438
+INFO | 2025-11-28 08:14:43 | [98000] Train Loss: 2.438
+INFO | 2025-11-28 08:14:43 | [98000] Saving checkpoint...
+INFO | 2025-11-28 08:16:20 | [98100] Train Loss: 2.484
+INFO | 2025-11-28 08:18:06 | [98200] Train Loss: 2.438
+INFO | 2025-11-28 08:19:35 | [98300] Train Loss: 2.500
+INFO | 2025-11-28 08:21:05 | [98400] Train Loss: 2.484
+INFO | 2025-11-28 08:22:35 | [98500] Train Loss: 2.406
+INFO | 2025-11-28 08:24:05 | [98600] Train Loss: 2.500
+INFO | 2025-11-28 08:25:35 | [98700] Train Loss: 2.438
+INFO | 2025-11-28 08:27:04 | [98800] Train Loss: 2.469
+INFO | 2025-11-28 08:28:34 | [98900] Train Loss: 2.422
+INFO | 2025-11-28 08:30:04 | [99000] Train Loss: 2.438
+INFO | 2025-11-28 08:31:34 | [99100] Train Loss: 2.500
+INFO | 2025-11-28 08:33:03 | [99200] Train Loss: 2.453
+INFO | 2025-11-28 08:34:33 | [99300] Train Loss: 2.469
+INFO | 2025-11-28 08:36:03 | [99400] Train Loss: 2.469
+INFO | 2025-11-28 08:37:49 | [99500] Train Loss: 2.453
+INFO | 2025-11-28 08:39:19 | [99600] Train Loss: 2.406
+INFO | 2025-11-28 08:40:49 | [99700] Train Loss: 2.453
+INFO | 2025-11-28 08:42:20 | [99800] Train Loss: 2.469
+INFO | 2025-11-28 08:43:50 | [99900] Train Loss: 2.484
+INFO | 2025-11-28 08:45:20 | [100000] Train Loss: 2.469
+INFO | 2025-11-28 08:45:20 | [100000] Saving checkpoint...
+INFO | 2025-11-28 08:45:27 | [100000] Evaluating loss...
+INFO | 2025-11-28 08:45:27 | [100000] Evaluation Loss: 2.766
+INFO | 2025-11-28 08:45:27 | [100000] Generating text...
+NFE: 1024: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1.0/1.0 [29:00<00:00, 1740.04s/it]
+INFO | 2025-11-28 09:14:30 | [100000] Evaluation Perplexity: 210.702
+INFO | 2025-11-28 09:14:30 | [100000] Evaluation Entropy: 8.009
+INFO | 2025-11-28 09:16:00 | [100100] Train Loss: 2.469
+INFO | 2025-11-28 09:17:30 | [100200] Train Loss: 2.438
+INFO | 2025-11-28 09:19:16 | [100300] Train Loss: 2.484
+INFO | 2025-11-28 09:20:45 | [100400] Train Loss: 2.469
+INFO | 2025-11-28 09:22:16 | [100500] Train Loss: 2.438
+INFO | 2025-11-28 09:23:47 | [100600] Train Loss: 2.484
+INFO | 2025-11-28 09:25:17 | [100700] Train Loss: 2.453
+INFO | 2025-11-28 09:26:46 | [100800] Train Loss: 2.469
+INFO | 2025-11-28 09:28:16 | [100900] Train Loss: 2.469
+INFO | 2025-11-28 09:29:46 | [101000] Train Loss: 2.438
+INFO | 2025-11-28 09:31:19 | [101100] Train Loss: 2.438
+INFO | 2025-11-28 09:32:49 | [101200] Train Loss: 2.500
+INFO | 2025-11-28 09:34:19 | [101300] Train Loss: 2.422
+INFO | 2025-11-28 09:35:50 | [101400] Train Loss: 2.422
+INFO | 2025-11-28 09:37:20 | [101500] Train Loss: 2.438
+INFO | 2025-11-28 09:39:06 | [101600] Train Loss: 2.469
+INFO | 2025-11-28 09:40:38 | [101700] Train Loss: 2.422
+INFO | 2025-11-28 09:42:08 | [101800] Train Loss: 2.469
+INFO | 2025-11-28 09:43:38 | [101900] Train Loss: 2.438
+INFO | 2025-11-28 09:45:08 | [102000] Train Loss: 2.453
+INFO | 2025-11-28 09:45:08 | [102000] Saving checkpoint...
+INFO | 2025-11-28 09:46:45 | [102100] Train Loss: 2.438
+INFO | 2025-11-28 09:48:15 | [102200] Train Loss: 2.438
+INFO | 2025-11-28 09:49:45 | [102300] Train Loss: 2.469
+INFO | 2025-11-28 09:51:15 | [102400] Train Loss: 2.422
+INFO | 2025-11-28 09:52:45 | [102500] Train Loss: 2.453
+INFO | 2025-11-28 09:54:15 | [102600] Train Loss: 2.469
+INFO | 2025-11-28 09:55:44 | [102700] Train Loss: 2.469
+INFO | 2025-11-28 09:57:14 | [102800] Train Loss: 2.484
+INFO | 2025-11-28 09:58:58 | [102900] Train Loss: 2.438
+INFO | 2025-11-28 10:00:28 | [103000] Train Loss: 2.438
+INFO | 2025-11-28 10:01:58 | [103100] Train Loss: 2.422
+INFO | 2025-11-28 10:03:27 | [103200] Train Loss: 2.422
+INFO | 2025-11-28 10:04:58 | [103300] Train Loss: 2.500
+INFO | 2025-11-28 10:06:27 | [103400] Train Loss: 2.422
+INFO | 2025-11-28 10:07:57 | [103500] Train Loss: 2.359
+INFO | 2025-11-28 10:09:27 | [103600] Train Loss: 2.484
+INFO | 2025-11-28 10:10:57 | [103700] Train Loss: 2.422
+INFO | 2025-11-28 10:12:27 | [103800] Train Loss: 2.484
+INFO | 2025-11-28 10:13:57 | [103900] Train Loss: 2.484
+INFO | 2025-11-28 10:15:26 | [104000] Train Loss: 2.438
+INFO | 2025-11-28 10:15:26 | [104000] Saving checkpoint...
+INFO | 2025-11-28 10:17:04 | [104100] Train Loss: 2.469
+INFO | 2025-11-28 10:18:50 | [104200] Train Loss: 2.469
+INFO | 2025-11-28 10:20:19 | [104300] Train Loss: 2.406
+INFO | 2025-11-28 10:21:49 | [104400] Train Loss: 2.438
+INFO | 2025-11-28 10:23:18 | [104500] Train Loss: 2.469
+INFO | 2025-11-28 10:24:49 | [104600] Train Loss: 2.484
+INFO | 2025-11-28 10:26:19 | [104700] Train Loss: 2.500
+INFO | 2025-11-28 10:27:48 | [104800] Train Loss: 2.469
+INFO | 2025-11-28 10:29:18 | [104900] Train Loss: 2.453
+INFO | 2025-11-28 10:30:48 | [105000] Train Loss: 2.469
+INFO | 2025-11-28 10:32:18 | [105100] Train Loss: 2.406
+INFO | 2025-11-28 10:33:47 | [105200] Train Loss: 2.438
+INFO | 2025-11-28 10:35:17 | [105300] Train Loss: 2.469
+INFO | 2025-11-28 10:36:47 | [105400] Train Loss: 2.484
+INFO | 2025-11-28 10:38:16 | [105500] Train Loss: 2.438
+INFO | 2025-11-28 10:40:02 | [105600] Train Loss: 2.453
+INFO | 2025-11-28 10:41:32 | [105700] Train Loss: 2.469
+INFO | 2025-11-28 10:43:02 | [105800] Train Loss: 2.438
+INFO | 2025-11-28 10:44:33 | [105900] Train Loss: 2.453
+INFO | 2025-11-28 10:46:04 | [106000] Train Loss: 2.469
+INFO | 2025-11-28 10:46:04 | [106000] Saving checkpoint...
+INFO | 2025-11-28 10:47:41 | [106100] Train Loss: 2.453
+INFO | 2025-11-28 10:49:11 | [106200] Train Loss: 2.453
+INFO | 2025-11-28 10:50:41 | [106300] Train Loss: 2.484
+INFO | 2025-11-28 10:52:11 | [106400] Train Loss: 2.375
+INFO | 2025-11-28 10:53:40 | [106500] Train Loss: 2.484
+INFO | 2025-11-28 10:55:10 | [106600] Train Loss: 2.469
+INFO | 2025-11-28 10:56:40 | [106700] Train Loss: 2.453
+INFO | 2025-11-28 10:58:10 | [106800] Train Loss: 2.406
+INFO | 2025-11-28 10:59:56 | [106900] Train Loss: 2.469
+INFO | 2025-11-28 11:01:26 | [107000] Train Loss: 2.469
+INFO | 2025-11-28 11:02:58 | [107100] Train Loss: 2.469
+INFO | 2025-11-28 11:04:28 | [107200] Train Loss: 2.453
+INFO | 2025-11-28 11:05:59 | [107300] Train Loss: 2.453
+INFO | 2025-11-28 11:07:30 | [107400] Train Loss: 2.422
+INFO | 2025-11-28 11:09:00 | [107500] Train Loss: 2.438
+INFO | 2025-11-28 11:10:29 | [107600] Train Loss: 2.406
+INFO | 2025-11-28 11:12:01 | [107700] Train Loss: 2.453
+INFO | 2025-11-28 11:13:31 | [107800] Train Loss: 2.438
+INFO | 2025-11-28 11:15:01 | [107900] Train Loss: 2.453
+INFO | 2025-11-28 11:16:31 | [108000] Train Loss: 2.453
+INFO | 2025-11-28 11:16:31 | [108000] Saving checkpoint...
+INFO | 2025-11-28 11:18:07 | [108100] Train Loss: 2.438
+INFO | 2025-11-28 11:19:52 | [108200] Train Loss: 2.438
+INFO | 2025-11-28 11:21:22 | [108300] Train Loss: 2.469
+INFO | 2025-11-28 11:22:52 | [108400] Train Loss: 2.453
+INFO | 2025-11-28 11:24:22 | [108500] Train Loss: 2.500
+INFO | 2025-11-28 11:25:52 | [108600] Train Loss: 2.438
+INFO | 2025-11-28 11:27:22 | [108700] Train Loss: 2.500
+INFO | 2025-11-28 11:28:52 | [108800] Train Loss: 2.438
+INFO | 2025-11-28 11:30:22 | [108900] Train Loss: 2.422
+INFO | 2025-11-28 11:31:52 | [109000] Train Loss: 2.500
+INFO | 2025-11-28 11:33:21 | [109100] Train Loss: 2.453
+INFO | 2025-11-28 11:34:51 | [109200] Train Loss: 2.500
+INFO | 2025-11-28 11:36:21 | [109300] Train Loss: 2.422
+INFO | 2025-11-28 11:37:51 | [109400] Train Loss: 2.484
+INFO | 2025-11-28 11:39:21 | [109500] Train Loss: 2.500
+INFO | 2025-11-28 11:41:05 | [109600] Train Loss: 2.422
+INFO | 2025-11-28 11:42:35 | [109700] Train Loss: 2.453
+INFO | 2025-11-28 11:44:05 | [109800] Train Loss: 2.453
+INFO | 2025-11-28 11:45:36 | [109900] Train Loss: 2.438
+INFO | 2025-11-28 11:47:06 | [110000] Train Loss: 2.484
+INFO | 2025-11-28 11:47:06 | [110000] Saving checkpoint...
+INFO | 2025-11-28 11:48:43 | [110100] Train Loss: 2.469
+INFO | 2025-11-28 11:50:13 | [110200] Train Loss: 2.484
+INFO | 2025-11-28 11:51:42 | [110300] Train Loss: 2.453
+INFO | 2025-11-28 11:53:12 | [110400] Train Loss: 2.516
+INFO | 2025-11-28 11:54:42 | [110500] Train Loss: 2.453
+INFO | 2025-11-28 11:56:11 | [110600] Train Loss: 2.469
+INFO | 2025-11-28 11:57:41 | [110700] Train Loss: 2.438
+INFO | 2025-11-28 11:59:11 | [110800] Train Loss: 2.406
+INFO | 2025-11-28 12:00:55 | [110900] Train Loss: 2.391
+INFO | 2025-11-28 12:02:24 | [111000] Train Loss: 2.438
+INFO | 2025-11-28 12:03:54 | [111100] Train Loss: 2.453
+INFO | 2025-11-28 12:05:24 | [111200] Train Loss: 2.469
+INFO | 2025-11-28 12:06:54 | [111300] Train Loss: 2.500
+INFO | 2025-11-28 12:08:24 | [111400] Train Loss: 2.453
+INFO | 2025-11-28 12:09:54 | [111500] Train Loss: 2.438
+INFO | 2025-11-28 12:11:25 | [111600] Train Loss: 2.453
+INFO | 2025-11-28 12:12:54 | [111700] Train Loss: 2.516
+INFO | 2025-11-28 12:14:24 | [111800] Train Loss: 2.422
+INFO | 2025-11-28 12:15:53 | [111900] Train Loss: 2.469
+INFO | 2025-11-28 12:17:23 | [112000] Train Loss: 2.438
+INFO | 2025-11-28 12:17:23 | [112000] Saving checkpoint...
+INFO | 2025-11-28 12:19:01 | [112100] Train Loss: 2.422
+INFO | 2025-11-28 12:20:47 | [112200] Train Loss: 2.453
+INFO | 2025-11-28 12:22:17 | [112300] Train Loss: 2.438
+INFO | 2025-11-28 12:23:47 | [112400] Train Loss: 2.438
+INFO | 2025-11-28 12:25:16 | [112500] Train Loss: 2.484
+INFO | 2025-11-28 12:26:47 | [112600] Train Loss: 2.438
+INFO | 2025-11-28 12:28:17 | [112700] Train Loss: 2.438
+INFO | 2025-11-28 12:29:47 | [112800] Train Loss: 2.438
+INFO | 2025-11-28 12:31:17 | [112900] Train Loss: 2.438
+INFO | 2025-11-28 12:32:47 | [113000] Train Loss: 2.422
+INFO | 2025-11-28 12:34:17 | [113100] Train Loss: 2.438
+INFO | 2025-11-28 12:35:49 | [113200] Train Loss: 2.438
+INFO | 2025-11-28 12:37:19 | [113300] Train Loss: 2.484
+INFO | 2025-11-28 12:38:49 | [113400] Train Loss: 2.453
+INFO | 2025-11-28 12:40:18 | [113500] Train Loss: 2.438
+INFO | 2025-11-28 12:42:05 | [113600] Train Loss: 2.422
+INFO | 2025-11-28 12:43:35 | [113700] Train Loss: 2.453
+INFO | 2025-11-28 12:45:05 | [113800] Train Loss: 2.438
+INFO | 2025-11-28 12:46:37 | [113900] Train Loss: 2.484
+INFO | 2025-11-28 12:48:07 | [114000] Train Loss: 2.422
+INFO | 2025-11-28 12:48:07 | [114000] Saving checkpoint...
+INFO | 2025-11-28 12:49:43 | [114100] Train Loss: 2.438
+INFO | 2025-11-28 12:51:13 | [114200] Train Loss: 2.406
+INFO | 2025-11-28 12:52:43 | [114300] Train Loss: 2.406
+INFO | 2025-11-28 12:54:13 | [114400] Train Loss: 2.453
+INFO | 2025-11-28 12:55:43 | [114500] Train Loss: 2.438
+INFO | 2025-11-28 12:57:13 | [114600] Train Loss: 2.406
+INFO | 2025-11-28 12:58:43 | [114700] Train Loss: 2.406
+INFO | 2025-11-28 13:00:12 | [114800] Train Loss: 2.406
+INFO | 2025-11-28 13:01:58 | [114900] Train Loss: 2.469
+INFO | 2025-11-28 13:03:29 | [115000] Train Loss: 2.422
+INFO | 2025-11-28 13:04:58 | [115100] Train Loss: 2.453
+INFO | 2025-11-28 13:06:29 | [115200] Train Loss: 2.438
+INFO | 2025-11-28 13:07:59 | [115300] Train Loss: 2.438
+INFO | 2025-11-28 13:09:29 | [115400] Train Loss: 2.422
+INFO | 2025-11-28 13:10:59 | [115500] Train Loss: 2.406
+INFO | 2025-11-28 13:12:29 | [115600] Train Loss: 2.406
+INFO | 2025-11-28 13:13:58 | [115700] Train Loss: 2.422
+INFO | 2025-11-28 13:15:28 | [115800] Train Loss: 2.469
+INFO | 2025-11-28 13:16:58 | [115900] Train Loss: 2.438
+INFO | 2025-11-28 13:18:28 | [116000] Train Loss: 2.438
+INFO | 2025-11-28 13:18:28 | [116000] Saving checkpoint...
+INFO | 2025-11-28 13:20:05 | [116100] Train Loss: 2.469
+INFO | 2025-11-28 13:21:48 | [116200] Train Loss: 2.422
+INFO | 2025-11-28 13:23:18 | [116300] Train Loss: 2.406
+INFO | 2025-11-28 13:24:47 | [116400] Train Loss: 2.484
+INFO | 2025-11-28 13:26:17 | [116500] Train Loss: 2.469
+INFO | 2025-11-28 13:27:48 | [116600] Train Loss: 2.453
+INFO | 2025-11-28 13:29:18 | [116700] Train Loss: 2.422
+INFO | 2025-11-28 13:30:47 | [116800] Train Loss: 2.406
+INFO | 2025-11-28 13:32:17 | [116900] Train Loss: 2.391
+INFO | 2025-11-28 13:33:47 | [117000] Train Loss: 2.484
+INFO | 2025-11-28 13:35:17 | [117100] Train Loss: 2.438
+INFO | 2025-11-28 13:36:47 | [117200] Train Loss: 2.469
+INFO | 2025-11-28 13:38:18 | [117300] Train Loss: 2.469
+INFO | 2025-11-28 13:39:48 | [117400] Train Loss: 2.422
+INFO | 2025-11-28 13:41:17 | [117500] Train Loss: 2.469
+INFO | 2025-11-28 13:43:04 | [117600] Train Loss: 2.422
+INFO | 2025-11-28 13:44:33 | [117700] Train Loss: 2.406
+INFO | 2025-11-28 13:46:03 | [117800] Train Loss: 2.422
+INFO | 2025-11-28 13:47:33 | [117900] Train Loss: 2.438
+INFO | 2025-11-28 13:49:03 | [118000] Train Loss: 2.469
+INFO | 2025-11-28 13:49:03 | [118000] Saving checkpoint...
+INFO | 2025-11-28 13:50:40 | [118100] Train Loss: 2.375
+INFO | 2025-11-28 13:52:10 | [118200] Train Loss: 2.453
+INFO | 2025-11-28 13:53:40 | [118300] Train Loss: 2.438
+INFO | 2025-11-28 13:55:10 | [118400] Train Loss: 2.484
+INFO | 2025-11-28 13:56:40 | [118500] Train Loss: 2.422
+INFO | 2025-11-28 13:58:09 | [118600] Train Loss: 2.422
+INFO | 2025-11-28 13:59:39 | [118700] Train Loss: 2.484
+INFO | 2025-11-28 14:01:09 | [118800] Train Loss: 2.375
+INFO | 2025-11-28 14:02:55 | [118900] Train Loss: 2.438
+INFO | 2025-11-28 14:04:24 | [119000] Train Loss: 2.406
+INFO | 2025-11-28 14:05:54 | [119100] Train Loss: 2.438
+INFO | 2025-11-28 14:07:24 | [119200] Train Loss: 2.500
+INFO | 2025-11-28 14:08:55 | [119300] Train Loss: 2.453
+INFO | 2025-11-28 14:10:26 | [119400] Train Loss: 2.469
+INFO | 2025-11-28 14:11:57 | [119500] Train Loss: 2.453
+INFO | 2025-11-28 14:13:27 | [119600] Train Loss: 2.500
+INFO | 2025-11-28 14:14:57 | [119700] Train Loss: 2.453
+INFO | 2025-11-28 14:16:28 | [119800] Train Loss: 2.484
+INFO | 2025-11-28 14:17:58 | [119900] Train Loss: 2.422
+INFO | 2025-11-28 14:19:28 | [120000] Train Loss: 2.422
+INFO | 2025-11-28 14:19:28 | [120000] Saving checkpoint...
+INFO | 2025-11-28 14:19:35 | [120000] Evaluating loss...
+INFO | 2025-11-28 14:19:35 | [120000] Evaluation Loss: 3.094
+INFO | 2025-11-28 14:19:35 | [120000] Generating text...
+NFE: 368:  36%|██████████████████████████████████████████████████████████████████████▍                                                                                                                             | 0.359375/1.0 [11:51<21:09, 1980.91s/it]

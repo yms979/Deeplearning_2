@@ -1,0 +1,163 @@
+_wandb:
+    value:
+        cli_version: 0.23.0
+        e:
+            hkpen5wigw3makq383e225ef8lmbmtyv:
+                args:
+                    - data.cache_dir=/home/yms/flow_matching/examples/text/cache
+                codePath: examples/text/run_train.py
+                codePathLocal: run_train.py
+                cpu_count: 20
+                cpu_count_logical: 40
+                cudaVersion: "12.9"
+                disk:
+                    /:
+                        total: "944049459200"
+                        used: "842241400832"
+                email: yms75825799@gmail.com
+                executable: /home/yms/miniconda3/envs/discrete_flow_matching/bin/python
+                git:
+                    commit: 25ae2d6a672468b58775f47ea086a2a8836be5a4
+                    remote: https://github.com/facebookresearch/flow_matching.git
+                gpu: NVIDIA GeForce RTX 3090
+                gpu_count: 8
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-35f06f14-9d2e-8688-1244-b95c1bba53d6
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-dc488956-9b87-73cb-da19-c145a80ffb0b
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-9223524a-7bf7-c28f-d750-a356405c515e
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-93fa1e26-513c-65c4-6c8a-96e81aafa4d1
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-add679ac-13b4-1716-b718-042c7ab16a23
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-f621709e-7ede-3231-e6d1-c06949276902
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-59fd4b3a-952b-888c-9949-b4cd27b75fa7
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-0efff2e2-352f-bcdc-5f28-74522993f979
+                host: ecacb8af89d7
+                memory:
+                    total: "270083874816"
+                os: Linux-5.4.0-88-generic-x86_64-with-glibc2.31
+                program: /home/yms/flow_matching/examples/text/run_train.py
+                python: CPython 3.10.19
+                root: /home/yms/flow_matching/examples/text/Hydra/2025.11.26/182303
+                startedAt: "2025-11-26T09:23:15.141060Z"
+                writerId: hkpen5wigw3makq383e225ef8lmbmtyv
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+                - 11
+                - 49
+                - 50
+                - 51
+            "2":
+                - 1
+                - 11
+                - 49
+                - 50
+                - 51
+            "3":
+                - 14
+                - 16
+                - 61
+            "4": 3.10.19
+            "5": 0.23.0
+            "6": 4.57.2
+            "12": 0.23.0
+            "13": linux-x86_64
+compute:
+    value:
+        ngpus: 8
+        nodes: 1
+data:
+    value:
+        cache_dir: /home/yms/flow_matching/examples/text/cache
+        num_workers: 8
+        train: wikitext103
+        valid: wikitext103
+eval:
+    value:
+        batch_size: 16
+        perplexity: true
+        perplexity_batch_size: 8
+        sample_batch_size: 8
+flow:
+    value:
+        exponent: 1
+        loss_function: cross_entropy
+        sampling_steps: 1024
+        scheduler_type: polynomial
+        source_distribution: uniform
+hydra_dir:
+    value: /home/yms/flow_matching/examples/text/Hydra
+logging:
+    value:
+        enable_wandb: true
+        entity: null
+        group: null
+        log_file_name: stdout.log
+        log_freq: 100
+        log_lr_every: 100
+        project: flow_matching
+model:
+    value:
+        compile: true
+        cond_dim: 128
+        dropout: 0.1
+        hidden_size: 768
+        length: 1024
+        n_blocks: 12
+        n_heads: 12
+optim:
+    value:
+        beta1: 0.9
+        beta2: 0.95
+        eps: 1e-08
+        eta_min_ratio: 0.1
+        fused: false
+        grad_clip: 1
+        log_lr_every: 100
+        lr: 0.0003
+        n_iters: 1000000
+        optimizer: AdamW
+        warmup: 2500
+        weight_decay: 0.03
+training:
+    value:
+        batch_size: 64
+        eval_freq: 20000
+        perplexity_freq: 20000
+        seed: 42
+        snapshot: 2000
+work_dir:
+    value: /home/yms/flow_matching/examples/text/Hydra/2025.11.26/182303

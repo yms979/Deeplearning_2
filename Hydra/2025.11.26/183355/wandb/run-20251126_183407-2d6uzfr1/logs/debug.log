@@ -1,0 +1,21 @@
+2025-11-26 18:34:07,225 INFO    MainThread:115523 [wandb_setup.py:_flush():80] Current SDK version is 0.23.0
+2025-11-26 18:34:07,225 INFO    MainThread:115523 [wandb_setup.py:_flush():80] Configure stats pid to 115523
+2025-11-26 18:34:07,225 INFO    MainThread:115523 [wandb_setup.py:_flush():80] Loading settings from /home/yms/.config/wandb/settings
+2025-11-26 18:34:07,225 INFO    MainThread:115523 [wandb_setup.py:_flush():80] Loading settings from /home/yms/flow_matching/examples/text/wandb/settings
+2025-11-26 18:34:07,225 INFO    MainThread:115523 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-11-26 18:34:07,225 INFO    MainThread:115523 [wandb_init.py:setup_run_log_directory():713] Logging user logs to /home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355/wandb/run-20251126_183407-2d6uzfr1/logs/debug.log
+2025-11-26 18:34:07,226 INFO    MainThread:115523 [wandb_init.py:setup_run_log_directory():714] Logging internal logs to /home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355/wandb/run-20251126_183407-2d6uzfr1/logs/debug-internal.log
+2025-11-26 18:34:07,226 INFO    MainThread:115523 [wandb_init.py:init():840] calling init triggers
+2025-11-26 18:34:07,226 INFO    MainThread:115523 [wandb_init.py:init():845] wandb.init called with sweep_config: {}
+config: {'compute': {'ngpus': 7, 'nodes': 1}, 'logging': {'log_freq': 100, 'log_lr_every': 100, 'log_file_name': 'stdout.log', 'enable_wandb': True, 'entity': None, 'project': 'flow_matching', 'group': None}, 'data': {'train': 'wikitext103', 'valid': 'wikitext103', 'cache_dir': '/home/yms/flow_matching/examples/text/cache', 'num_workers': 8}, 'training': {'batch_size': 64, 'snapshot': 2000, 'eval_freq': 20000, 'perplexity_freq': 20000, 'seed': 42}, 'eval': {'batch_size': 16, 'sample_batch_size': 8, 'perplexity': True, 'perplexity_batch_size': 8}, 'optim': {'weight_decay': 0.03, 'optimizer': 'AdamW', 'lr': 0.0003, 'beta1': 0.9, 'beta2': 0.95, 'eps': 1e-08, 'warmup': 2500, 'grad_clip': 1.0, 'eta_min_ratio': 0.1, 'fused': False, 'n_iters': 1000000, 'log_lr_every': 100}, 'flow': {'source_distribution': 'uniform', 'loss_function': 'cross_entropy', 'exponent': 1.0, 'scheduler_type': 'polynomial', 'sampling_steps': 1024}, 'model': {'hidden_size': 768, 'cond_dim': 128, 'length': 1024, 'n_blocks': 12, 'n_heads': 12, 'dropout': 0.1, 'compile': True}, 'hydra_dir': '/home/yms/flow_matching/examples/text/Hydra', 'work_dir': '/home/yms/flow_matching/examples/text/Hydra/2025.11.26/183355', '_wandb': {}}
+2025-11-26 18:34:07,226 INFO    MainThread:115523 [wandb_init.py:init():888] starting backend
+2025-11-26 18:34:07,515 INFO    MainThread:115523 [wandb_init.py:init():891] sending inform_init request
+2025-11-26 18:34:07,523 INFO    MainThread:115523 [wandb_init.py:init():899] backend started and connected
+2025-11-26 18:34:07,528 INFO    MainThread:115523 [wandb_init.py:init():969] updated telemetry
+2025-11-26 18:34:07,540 INFO    MainThread:115523 [wandb_init.py:init():993] communicating run to backend with 90.0 second timeout
+2025-11-26 18:34:08,562 INFO    MainThread:115523 [wandb_init.py:init():1040] starting run threads in backend
+2025-11-26 18:34:08,705 INFO    MainThread:115523 [wandb_run.py:_console_start():2504] atexit reg
+2025-11-26 18:34:08,705 INFO    MainThread:115523 [wandb_run.py:_redirect():2352] redirect: wrap_raw
+2025-11-26 18:34:08,705 INFO    MainThread:115523 [wandb_run.py:_redirect():2421] Wrapping output streams.
+2025-11-26 18:34:08,705 INFO    MainThread:115523 [wandb_run.py:_redirect():2444] Redirects installed.
+2025-11-26 18:34:08,713 INFO    MainThread:115523 [wandb_init.py:init():1080] run started, returning control to user process

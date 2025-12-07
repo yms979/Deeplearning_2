@@ -1,0 +1,55 @@
+compute:
+  ngpus: 8
+  nodes: 1
+logging:
+  log_freq: 100
+  log_lr_every: ${logging.log_freq}
+  log_file_name: stdout.log
+  enable_wandb: true
+  entity: flows
+  project: flow_matching
+  group: null
+data:
+  train: fineweb-edu
+  valid: wikitext103
+  cache_dir: /home/yms/.cache/flow_matching_data
+  num_workers: 8
+training:
+  batch_size: 512
+  snapshot: 2000
+  eval_freq: 20000
+  perplexity_freq: 20000
+  seed: 42
+eval:
+  batch_size: 512
+  sample_batch_size: 16
+  perplexity: true
+  perplexity_batch_size: 16
+optim:
+  weight_decay: 0.03
+  optimizer: AdamW
+  lr: 0.0003
+  beta1: 0.9
+  beta2: 0.95
+  eps: 1.0e-08
+  warmup: 2500
+  grad_clip: 1.0
+  eta_min_ratio: 0.1
+  fused: false
+  n_iters: 1000000
+  log_lr_every: ${logging.log_lr_every}
+flow:
+  source_distribution: uniform
+  loss_function: cross_entropy
+  exponent: 1.0
+  scheduler_type: polynomial
+  sampling_steps: 1024
+model:
+  hidden_size: 768
+  cond_dim: 128
+  length: 1024
+  n_blocks: 12
+  n_heads: 12
+  dropout: 0.1
+  compile: true
+hydra_dir: /home/yms/flow_matching/examples/text/outputs

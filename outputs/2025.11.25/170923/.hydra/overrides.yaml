@@ -1,0 +1,2 @@
+- data.cache_dir=/home/yms/.cache/flow_matching_data
+- hydra_dir=/home/yms/flow_matching/examples/text/outputs

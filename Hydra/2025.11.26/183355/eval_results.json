@@ -1,0 +1,2 @@
+{"timestamp": "2025-11-28T19:19:57.505572", "metric_type": "generation", "perplexity": 187.28897094726562, "entropy": 7.926172733306885}
+{"timestamp": "2025-11-28T19:26:11.910114", "metric_type": "elbo", "elbo": 45.614341735839844, "dataset": "wikitext103"}

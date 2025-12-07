@@ -1,0 +1,83 @@
+defaults:
+  - _self_
+  - override hydra/launcher: submitit_slurm
+
+compute:
+  ngpus: 7
+  nodes: 1
+
+logging:
+  log_freq: 100
+  log_lr_every: ${logging.log_freq}
+  log_file_name: stdout.log
+  enable_wandb: True
+  entity: null           # <--- 이렇게 'flows'를 지우고 null로 바꾸세요
+  project: flow_matching # 프로젝트 이름은 그대로 두셔도 됩니다 (자동 생성됨)
+  group: null
+
+data:
+  train: wikitext103
+  valid: wikitext103
+  cache_dir: /home/yms/flow_matching/examples/text/cache
+  num_workers: 8
+
+training:
+  batch_size: 64
+  snapshot: 2000
+  eval_freq: 20000
+  perplexity_freq: 20000
+  seed: 42
+
+eval:
+  batch_size: 16
+  sample_batch_size: 8
+  perplexity: True
+  perplexity_batch_size: 8
+
+optim:
+  weight_decay: 0.03
+  optimizer: AdamW
+  lr: 3e-4
+  beta1: 0.9
+  beta2: 0.95
+  eps: 1e-8
+  warmup: 2500
+  grad_clip: 1.
+  eta_min_ratio: 0.1
+  fused: false
+  n_iters: 1000000
+  log_lr_every: ${logging.log_lr_every}
+
+flow:
+  source_distribution: uniform  # [uniform, mask]
+  loss_function: cross_entropy  # [cross_entropy, generalized_kl]
+  exponent: 1.
+  scheduler_type: polynomial
+  sampling_steps: 1024
+
+model:
+  hidden_size: 768
+  cond_dim: 128
+  length: 1024
+  n_blocks: 12
+  n_heads: 12
+  dropout: 0.1
+  compile: true
+
+hydra_dir: /home/yms/flow_matching/examples/text/Hydra
+
+hydra:
+  run:
+    dir: ${hydra_dir}/${now:%Y.%m.%d}/${now:%H%M%S}
+  sweep:
+    dir: ${hydra_dir}/${now:%Y.%m.%d}/${now:%H%M%S}
+    subdir: ${hydra.job.num}
+  launcher:
+    max_num_timeout: 100000
+    timeout_min: 4320
+    partition: learn
+    qos: # TODO: change it to your own qos
+    gpus_per_node: ${compute.ngpus}
+    mem_gb: 1760
+    cpus_per_task: 32
+    nodes: ${compute.nodes}
