@@ -59,6 +59,7 @@ cd discrete-flow-matching
 # Install dependencies
 pip install -r requirements.txt
 
+
 WikiText-103을 훈련 데이터셋으로 사용한다. 스크립트는 Hugging Face datasets 라이브러리를 사용하여 데이터를 자동으로 다운로드하고 처리한다.
 
 Small 모델 (150M 파라미터) 실험을 재현하려면 다음 명령어를 실행한다:
