@@ -53,11 +53,13 @@
 
 bash
 # Clone the repository
-```git clone [https://github.com/your-username/discrete-flow-matching.git](https://github.com/your-username/discrete-flow-matching.git)
+```
+git clone [https://github.com/your-username/discrete-flow-matching.git](https://github.com/your-username/discrete-flow-matching.git)
 cd discrete-flow-matching
 ```
 # Install dependencies
-```pip install -r requirements.txt
+```
+pip install -r requirements.txt
 ```
 
 WikiText-103을 훈련 데이터셋으로 사용한다. 스크립트는 Hugging Face datasets 라이브러리를 사용하여 데이터를 자동으로 다운로드하고 처리한다.
