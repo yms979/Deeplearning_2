@@ -46,11 +46,10 @@
 
 
 ## Usage
-
-This section provides instructions on how to train the Discrete Flow Matching (DFM) model and generate text samples.
+이 섹션은 DFM (Discrete Flow Matching) 모델을 훈련하고 텍스트 샘플을 생성하는 방법에 대한 지침을 제공한다.
 
 ### 1. Environment Setup
-First, install the required dependencies. We recommend using a virtual environment (Conda or venv).
+먼저, 필요한 종속성(dependencies)을 설치해야 한다. 가상 환경(Conda 또는 venv)을 사용하는 것을 권장한다.
 
 ```bash
 # Clone the repository
@@ -60,10 +59,9 @@ cd discrete-flow-matching
 # Install dependencies
 pip install -r requirements.txt
 
+WikiText-103을 훈련 데이터셋으로 사용한다. 스크립트는 Hugging Face datasets 라이브러리를 사용하여 데이터를 자동으로 다운로드하고 처리한다.
 
-We use WikiText-103 as the training dataset. The script automatically downloads and processes the data using the Hugging Face datasets library.
-
-To reproduce the Small Model (150M parameters) experiment described in the report, run the following command:
+Small 모델 (150M 파라미터) 실험을 재현하려면 다음 명령어를 실행한다:
 python train.py \
     --run_name "dfm-wikitext-small" \
     --dataset_name "wikitext" \
@@ -81,104 +79,41 @@ python train.py \
 
 
 # Text example
-
-This example implements training of a discrete flow matching model on text data. This repository provides the necessary tools and scripts to train and evaluate these models.
-
-**Note:** this example was tested only using PyTorch 2.5 and on a single node of H100 (8 gpus). With this setup, we achieved approximately 380k training steps in 24 hours.
+이 예시는 텍스트 데이터에 대한 이산 흐름 정합(discrete flow matching) 모델의 훈련을 구현한다. 이 저장소는 이러한 모델을 훈련하고 평가하는 데 필요한 도구와 스크립트를 제공한다.
 
 ## Installation
 
-To get started with this project, follow these steps to set up your environment:
-
-```bash
-conda env create -f environment.yml
-conda activate discrete_flow_matching
-```
-
-
-Specify the data cache and checkpoint directories. Data will automatically be downloaded into the cache directory.
+데이터 캐시 및 체크포인트 디렉토리를 지정한다. 데이터는 캐시 디렉토리로 자동 다운로드된다.
 ```bash
 CACHE_DIR=...
 HYDRA_RUN_DIR=...
 ```
 
-To train a discrete flow matching model on fine-web-edu, run:
-
-```bash
-python run_train.py data.cache_dir=${CACHE_DIR}
-```
-
-To use `slurm`, modify the `slurm` config according to the cluster you are working on, and run:
+slurm을 사용하려면, 작업 중인 클러스터에 맞게 slurm 설정을 수정하고 다음을 실행한다.
 ```bash
 python run_train.py data.cache_dir=${CACHE_DIR} hydra_dir=${HYDRA_RUN_DIR} -m &
 ```
-
-## Results
-
-We trained models with linear scheduler (`PolynomialConvexScheduler(n=1.0)`) for one million steps on FineWeb-EDU.
-
-```bash
-PYTHONPATH="." python scripts/run_eval.py --work_dir "/path/to/exp/folder" --ngpus 8 --eval_elbo --eval_perplexity
-```
-
-<table>
-    <thead>
-        <tr>
-            <th>Scheduler</th>
-            <th>Source distribution</th>
-            <th>Loss</th>
-            <th>Generative perplexity</th>
-            <th>ELBO</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan=4>Linear</td>
-            <td rowspan=2>Mask</td>
-            <td>Cross-entropy</td>
-            <td><center>128.9</center></td>
-            <td><center>53.2</center></td>
-        </tr>
-        <tr>
-            <td>Generalized KL</td>
-            <td><center>132.2</center></td>
-            <td><center>47.9</center></td>
-        </tr>
-        <tr>
-            <td rowspan=2>Uniform</td>
-            <td>Cross-entropy</td>
-            <td><center>90.9</center></td>
-            <td><center>71.7</center></td>
-        </tr>
-        <tr>
-            <td>Generalized KL</td>
-            <td><center>82.1</center></td>
-            <td><center>71.3</center></td>
-        </tr>
-    </tbody>
-</table>
-
 
 ## Folder structure
 
 ```bash
 .
-├── configs        # Train configs
+├── configs        # 훈련 설정 파일
 │   └── ...
-├── data           # Data loading and preprocessing
+├── data           # 데이터 로딩 및 전처리
 │   └── ...
-├── logic          # Logic components, such as flow related classes
+├── logic          # flow 관련 클래스와 같은 구성 요소
 │   └── ...
-├── model          # Transformer implementation
+├── model          # Transformer 구현
 │   └── ...
-├── scripts        # Evaluation script
+├── scripts        # 평가 스크립트
 │   └── ...
-├── utils          # Utility functions
+├── utils          # 유틸리티 함수
 │    └── ...
 ├── README.md
 ├── environment.yml
 ├── train.py
-└── run_train.py   # Run training script
+└── run_train.py   # 훈련 실행 스크립트
 ```
 
 ## Implemented methods
