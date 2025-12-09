@@ -78,3 +78,108 @@ python train.py \
     --max_steps 50000 \
     --save_interval 5000 \
     --output_dir "./checkpoints"
+
+
+# Text example
+
+This example implements training of a discrete flow matching model on text data. This repository provides the necessary tools and scripts to train and evaluate these models.
+
+**Note:** this example was tested only using PyTorch 2.5 and on a single node of H100 (8 gpus). With this setup, we achieved approximately 380k training steps in 24 hours.
+
+## Installation
+
+To get started with this project, follow these steps to set up your environment:
+
+```bash
+conda env create -f environment.yml
+conda activate discrete_flow_matching
+```
+
+
+Specify the data cache and checkpoint directories. Data will automatically be downloaded into the cache directory.
+```bash
+CACHE_DIR=...
+HYDRA_RUN_DIR=...
+```
+
+To train a discrete flow matching model on fine-web-edu, run:
+
+```bash
+python run_train.py data.cache_dir=${CACHE_DIR}
+```
+
+To use `slurm`, modify the `slurm` config according to the cluster you are working on, and run:
+```bash
+python run_train.py data.cache_dir=${CACHE_DIR} hydra_dir=${HYDRA_RUN_DIR} -m &
+```
+
+## Results
+
+We trained models with linear scheduler (`PolynomialConvexScheduler(n=1.0)`) for one million steps on FineWeb-EDU.
+
+```bash
+PYTHONPATH="." python scripts/run_eval.py --work_dir "/path/to/exp/folder" --ngpus 8 --eval_elbo --eval_perplexity
+```
+
+<table>
+    <thead>
+        <tr>
+            <th>Scheduler</th>
+            <th>Source distribution</th>
+            <th>Loss</th>
+            <th>Generative perplexity</th>
+            <th>ELBO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=4>Linear</td>
+            <td rowspan=2>Mask</td>
+            <td>Cross-entropy</td>
+            <td><center>128.9</center></td>
+            <td><center>53.2</center></td>
+        </tr>
+        <tr>
+            <td>Generalized KL</td>
+            <td><center>132.2</center></td>
+            <td><center>47.9</center></td>
+        </tr>
+        <tr>
+            <td rowspan=2>Uniform</td>
+            <td>Cross-entropy</td>
+            <td><center>90.9</center></td>
+            <td><center>71.7</center></td>
+        </tr>
+        <tr>
+            <td>Generalized KL</td>
+            <td><center>82.1</center></td>
+            <td><center>71.3</center></td>
+        </tr>
+    </tbody>
+</table>
+
+
+## Folder structure
+
+```bash
+.
+├── configs        # Train configs
+│   └── ...
+├── data           # Data loading and preprocessing
+│   └── ...
+├── logic          # Logic components, such as flow related classes
+│   └── ...
+├── model          # Transformer implementation
+│   └── ...
+├── scripts        # Evaluation script
+│   └── ...
+├── utils          # Utility functions
+│    └── ...
+├── README.md
+├── environment.yml
+├── train.py
+└── run_train.py   # Run training script
+```
+
+## Implemented methods
+- [Discrete Flow Matching](https://arxiv.org/abs/2407.15595)
