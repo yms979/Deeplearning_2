@@ -65,7 +65,8 @@ pip install -r requirements.txt
 WikiText-103을 훈련 데이터셋으로 사용한다. 스크립트는 Hugging Face datasets 라이브러리를 사용하여 데이터를 자동으로 다운로드하고 처리한다.
 
 Small 모델 (150M 파라미터) 실험을 재현하려면 다음 명령어를 실행한다:
-```python train.py \
+```
+python train.py \
     --run_name "dfm-wikitext-small" \
     --dataset_name "wikitext" \
     --dataset_config "wikitext-103-raw-v1" \
@@ -87,19 +88,22 @@ Small 모델 (150M 파라미터) 실험을 재현하려면 다음 명령어를 �
 ## Installation
 
 데이터 캐시 및 체크포인트 디렉토리를 지정한다. 데이터는 캐시 디렉토리로 자동 다운로드된다.
-```bash
+```
+bash
 CACHE_DIR=...
 HYDRA_RUN_DIR=...
 ```
 
 slurm을 사용하려면, 작업 중인 클러스터에 맞게 slurm 설정을 수정하고 다음을 실행한다.
-```bash
+```
+bash
 python run_train.py data.cache_dir=${CACHE_DIR} hydra_dir=${HYDRA_RUN_DIR} -m &
 ```
 
 ## Folder structure
 
-```bash
+```
+bash
 .
 ├── configs        # 훈련 설정 파일
 │   └── ...
