@@ -51,19 +51,19 @@
 ### 1. Environment Setup
 먼저, 필요한 종속성(dependencies)을 설치해야 한다. 가상 환경(Conda 또는 venv)을 사용하는 것을 권장한다.
 
-```bash
+bash
 # Clone the repository
 git clone [https://github.com/your-username/discrete-flow-matching.git](https://github.com/your-username/discrete-flow-matching.git)
-cd discrete-flow-matching```
+cd discrete-flow-matching
 
 # Install dependencies
-```pip install -r requirements.txt```
+pip install -r requirements.txt
 
 
 WikiText-103을 훈련 데이터셋으로 사용한다. 스크립트는 Hugging Face datasets 라이브러리를 사용하여 데이터를 자동으로 다운로드하고 처리한다.
 
 Small 모델 (150M 파라미터) 실험을 재현하려면 다음 명령어를 실행한다:
-```python train.py \
+python train.py \
     --run_name "dfm-wikitext-small" \
     --dataset_name "wikitext" \
     --dataset_config "wikitext-103-raw-v1" \
@@ -76,7 +76,7 @@ Small 모델 (150M 파라미터) 실험을 재현하려면 다음 명령어를 �
     --learning_rate 3e-4 \
     --max_steps 50000 \
     --save_interval 5000 \
-    --output_dir "./checkpoints"```
+    --output_dir "./checkpoints"
 
 
 # Text example
